@@ -1,0 +1,1 @@
+# Este archivo debe contener las funciones que se comunican con la base de datos (modelos)
