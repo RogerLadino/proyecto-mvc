@@ -157,7 +157,7 @@
     import { iniciarCodigoSocket } from "{{ url_for('static', filename='js/features/codigo/codigo.socket.js') }}";
     import { editor } from "{{ url_for('static', filename='js/features/codigo/codigo.editor.js') }}";
 
-    editor.setValue(`{{ codigo.codigo }}`);
+    editor.setValue(`{{ codigo.codigo }}`, -1);
     cargarPruebas({{ pruebas|tojson|safe }});
     configurarEjecutarCodigo("{{ url_for('codigo_bp.ejecutar_codigo', id_aula=id_aula, id_ejercicio=id_ejercicio, id_codigo=id_codigo) }}");
     iniciarCodigoSocket({{ id_codigo }})

@@ -13,6 +13,6 @@ def consultar_aula(id_aula):
 def es_profesor(id_usuario, id_aula):
   aula = consultar_aula(id_aula)
     
-  if aula and aula['idUsuario'] == id_usuario:
+  if aula['idUsuario'] == id_usuario:
     return True
   return False

@@ -35,10 +35,10 @@
   <div class="main-container">
     <nav class="sidebar">
       {% for user in usuarios %}
-        <div class="nav-item" data-id-codigo="{{ user.idCodigo }}">
+        <a class="nav-item" data-id-codigo="{{ user.idCodigo }}" href="{{url_for('codigo_bp.codigo', id_aula=id_aula, id_ejercicio=id_ejercicio, id_codigo=user.idCodigo)}}">
           <i class="icon-circle icon-accent"></i>
           <span>{{ user.nombre1 }} {{ user.apellido1 }}</span>
-        </div>
+        </a>
       {% endfor %}
     </nav>
     <main class="main-content">
@@ -143,7 +143,7 @@
     import { iniciarCodigoSocket } from "{{ url_for('static', filename='js/features/codigo/codigo.socket.js') }}";
     import { editor } from "{{ url_for('static', filename='js/features/codigo/codigo.editor.js') }}";
 
-    editor.setValue(`{{ codigo.codigo }}`);
+    editor.setValue(`{{ codigo.codigo }}`, -1);
     cargarPruebas({{ pruebas|tojson|safe }});
     configurarEjecutarCodigo("{{ url_for('codigo_bp.ejecutar_codigo', id_aula=id_aula, id_ejercicio=id_ejercicio, id_codigo=id_codigo) }}");
     iniciarCodigoSocket({{ id_codigo }})

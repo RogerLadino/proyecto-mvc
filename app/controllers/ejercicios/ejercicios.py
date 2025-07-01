@@ -4,13 +4,14 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 from app.models.ejercicios.ejercicios import (insertar_ejercicio, consultar_ejercicio, editar_ejercicio, eliminar_ejercicio, consultar_estadisticas_ejercicio)
 from app.models.pruebas.pruebas import (insertar_prueba, consultar_pruebas, editar_prueba)
 from app.models.codigo.codigo import (consultar_codigo, darNota, insertar_codigo)
+from app.services.usuario import (obtener_sesion_id_usuario)
 from app.models.aulas.aulas import es_profesor
 
 ejercicios_bp = Blueprint('ejercicios_bp', __name__)
 
 @ejercicios_bp.route('/aulas/<id_aula>/ejercicios/<id_ejercicio>', methods=['GET'])
 def ejercicio(id_aula, id_ejercicio):
-  idUsuario = session.get('id_usuario')
+  idUsuario = obtener_sesion_id_usuario()
 
   ejercicio = consultar_ejercicio(id_ejercicio)
 
