@@ -1,0 +1,39 @@
+.exercise-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-header {
+    font-weight: bold;
+    text-align: left;
+}
+
+.table-row td,
+.table-header th {
+    padding: 10px;
+    border: 1px solid var(--card);
+}
+
+.table-row td {
+    padding: 10px 10px;
+}
+
+/* Estilo para tablas en pruebas */
+.tabla-pruebas {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-pruebas th,
+.tabla-pruebas td {
+    width: 50%; /* Cada columna ocupa el 50% del ancho */
+    margin: 10px;
+    background-color: var(--card); /* Color de fondo */
+    text-align: left;
+    border: none; /* Sin bordes */
+}
+
+.tabla-pruebas th {
+    font-weight: bold;
+    gap: 5px;
+}

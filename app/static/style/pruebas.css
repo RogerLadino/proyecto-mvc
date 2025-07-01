@@ -1,0 +1,222 @@
+/* Sección de pruebas */
+
+.prueba {
+  margin: 5px 0;
+}
+
+.test-accordion {
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.test-function {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.test-function-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--secondary);
+  font-size: 14px;
+  width: 250px;
+}
+
+.test-function i {
+  color: var(--secondary);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.test-content {
+  padding: 10px 0px;
+}
+
+.param-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  color: var(--secondary);
+  font-size: 14px;
+}
+
+.param-header i {
+  cursor: pointer;
+}
+
+.param-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.param-grid-header {
+  display: contents;
+}
+
+.param-grid-header span {
+  padding: 10px;
+  color: var(--secondary);
+  font-size: 14px;
+  background-color: var(--card);
+}
+
+.param-row {
+  display: contents;
+}
+
+.param-value-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.valor-parametro{
+  background-color: var(--card);
+  border: none;
+  padding: 10px;
+  padding-right: 30px;
+  color: var(--secondary);
+  font-size: 14px;
+  width: 100%;
+}
+
+.valor-parametro:focus {
+  outline: none;
+}
+
+.param-value-container i {
+  position: absolute;
+  right: 10px;
+  color: var(--secondary);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.param-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 0;
+}
+
+.param-actions i {
+  color: var(--secondary);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.param-select {
+  background-color: var(--card);
+  padding: 10px;
+  color: var(--secondary);
+  font-size: 14px;
+  width: 100%;
+  cursor: pointer;
+  border: none;
+}
+
+.param-select:focus {
+  outline: none;
+}
+
+.param-select option {
+  background-color: var(--card);
+  color: var(--secondary);
+  padding: 10px;
+}
+
+input-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.circle-plus {
+  background-color: var(--card);
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.circle-plus i {
+  color: var(--secondary);
+  font-size: 14px;
+}
+
+/* Grupo de botones de editar y borrar */
+
+.button-group {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.button-group>* {
+  width: 100%;
+  max-width: 200px;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.test-title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.test-title span {
+  background-color: var(--accent);
+  padding: 4px 12px;
+  border-radius: 2px;
+  color: var(--card);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.test-header {
+  width: 100%;
+  gap: 5px;
+  height: 100%;
+  padding: 12px 15px;
+  border-radius: 5px;
+  background-color: var(--card);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.test-header .dropdown-toggle {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.test-header .dropdown-toggle.expanded {
+  transform: rotate(180deg); /* Rotar el ícono cuando está expandido */
+}
+
+.test-main-content {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  padding: 0 15px;
+}

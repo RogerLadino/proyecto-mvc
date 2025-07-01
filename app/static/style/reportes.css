@@ -1,0 +1,73 @@
+.reporte-x-icon{
+  margin-left: auto;
+}
+
+.main-container {
+  display: flex;
+  height: calc(100vh - 70px);
+}
+
+.main-content {
+  flex: 1;
+  padding: 0 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Titulo del ejercicio */
+
+.exercise-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.title-buttons {
+  display: flex;
+  gap: 10px;
+  height: 100%;
+  margin-left: auto;
+}
+
+.exercise-header>i {
+  font-size: 30px;
+  color: var(--accent);
+}
+
+.exercise-header span {
+  font-size: 28px;
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+/* Tabla de estudiantes */
+
+.exercise-table {
+  width: auto;
+  border-collapse: collapse;
+}
+
+.table-header {
+  font-weight: bold;
+  text-align: left;
+}
+
+.table-row td,
+.table-header th {
+  padding: 10px;
+  border: 1px solid var(--card);
+}
+
+.table-row td {
+  padding: 10px 10px;
+}
+
+.statistic {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

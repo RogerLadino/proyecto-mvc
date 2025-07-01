@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/general.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='icons/icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/navigation.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/ejercicio.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/tablas.css') }}">
+</head>
+
+<body>
+  <nav class="top-navbar">
+    <div class="nav-left">
+      <a href="clases.html" class="logo-link">
+        <div class="app-logo"></div>
+        <h1 class="app-name">Nombre</h1>
+      </a>
+    </div>
+    <div class="nav-right">
+      <div class="user-circle">
+        <i class="icon-user"></i>
+        <div class="dropdown-menu">
+          <a href="index.html" class="dropdown-item">Cerrar sesión</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <aside class="sidebar">
+      <nav class="side-nav">
+        <ul>
+          <i class="divisor"></i>
+          <li class="nav-item home">
+            <a href="clases.html">
+              <i class="icon-home"></i>
+              <span>Inicio</span>
+            </a>
+          </li>
+          <i class="divisor"></i>
+          <li class="nav-item class1">
+            <div class="class-icon">
+              <i class="empty-square"></i>
+            </div>
+            <a href="lista-ejercicios-profesor.html">Clase 1</a>
+          </li>
+          <li class="nav-item class2">
+            <div class="class-icon">
+              <i class="empty-square"></i>
+            </div>
+            <a href="lista-ejercicios.html">Clase 2</a>
+          </li>
+          <li class="nav-item class3">
+            <div class="class-icon">
+              <i class="empty-square"></i>
+            </div>
+            <span>Clase 3</span>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <form class="main-content" method="post" action="{{ url_for('ejercicios_bp.guardar_notas', id_aula=id_aula, id_ejercicio=id_ejercicio) }}">
+      <div class="exercise-header">
+        <i class="icon-circle-empty"></i>
+        <span class="ejercicio-titulo">Ejercicio 1</span>
+        <div class="title-buttons">
+          <a class="title-button-container" href="{{ url_for('ejercicios_bp.editar', id_aula=id_aula, id_ejercicio=id_ejercicio) }}">
+            <button class="card-button" id="boton-editar" type="button">
+              <i class="icon-pencil"></i>
+              Editar ejercicio
+            </button>
+          </a>
+          <a class="title-button-container">
+            <button type="submit" class="button" id="boton-guardar">
+              Guardar
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <table class="exercise-table">
+        <thead>
+          <tr class="table-header">
+            <th>Nombre</th>
+            <th>Nota</th>
+            <th>Intentos</th>
+            <th>Resuelto</th>
+            <th>A tiempo</th>
+            <th>Código</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          {% for usuario in estadisticas %}
+          <tr class="table-row usuario">
+            <input type="hidden" name="id-usuario" value="{{ usuario.idUsuario }}-{{ usuario.idCodigo }}">
+            <td>
+              <i class="icon-circle icon-warning"></i>
+              {{ usuario.nombre1 }} {{ usuario.apellido1 }}
+            </td>
+            <td>
+              <input name="nota-{{ usuario.idUsuario }}" type="text" class="underline-input note-input"
+                value="{{ usuario.notaObtenida if usuario.notaObtenida is not none else '' }}">/100
+            </td>
+            <td>
+              <div class="attempts">{{ usuario.intentosRealizados if usuario.intentosRealizados is not none else 0 }}
+              </div>
+            </td>
+            <td>
+              <div class="checkmark">
+                {% if usuario.resuelto %}
+                <i class="icon-check"></i>
+                {% else %}
+                <i class="icon-cancel"></i>
+                {% endif %}
+              </div>
+            </td>
+            <td>
+              <div class="clock">
+                <i class="icon-ok"></i>
+              </div>
+            </td>
+            <td>
+              <a href="" class="button-link">
+                <button class="card-button"><i class="icon-code"></i> Ver código</button>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </form>
+  </div>
+</body>
+
+</html>

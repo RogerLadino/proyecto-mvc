@@ -1,9 +1,111 @@
-# Este archivo debe contener las siguientes rutas:
+import json
+from flask import Blueprint, render_template, request, redirect, url_for, session
 
-# GET /aula/<id>/ejercicios -- Listar ejercicio
-# POST /aula/<id>/ejercicios/crear -- Crear ejercicio
-# DELETE /aula/<id>/ejercicios/eliminar/<id> -- Eliminar ejercicio según id
-# PUT /aula/<id>/ejercicios/modificar/<id>  -- Modificar ejercicio según id
+from app.models.ejercicios.ejercicios import (insertar_ejercicio, consultar_ejercicio, editar_ejercicio, eliminar_ejercicio, consultar_estadisticas_ejercicio)
+from app.models.pruebas.pruebas import (insertar_prueba, consultar_pruebas, editar_prueba)
+from app.models.codigo.codigo import (consultar_codigo, darNota, insertar_codigo)
+from app.models.aulas.aulas import es_profesor
 
+ejercicios_bp = Blueprint('ejercicios_bp', __name__)
 
+@ejercicios_bp.route('/aulas/<id_aula>/ejercicios/<id_ejercicio>', methods=['GET'])
+def ejercicio(id_aula, id_ejercicio):
+  idUsuario = session.get('id_usuario')
 
+  ejercicio = consultar_ejercicio(id_ejercicio)
+
+  if es_profesor(idUsuario, id_aula):
+    estadisticas = consultar_estadisticas_ejercicio(id_ejercicio, id_aula) 
+    
+    return render_template('ejercicios/ejercicio-profesor.html', id_aula=id_aula, id_ejercicio=id_ejercicio, estadisticas=estadisticas, ejercicio=ejercicio)
+
+  codigo = consultar_codigo(idUsuario, id_ejercicio)
+  
+  return render_template('ejercicios/ejercicio.html', ejercicio=ejercicio, codigo=codigo, id_aula=id_aula, id_ejercicio=id_ejercicio)
+
+@ejercicios_bp.route('/aulas/<id_aula>/ejercicios/crear', methods=['GET', 'POST'])
+def crear(id_aula):
+  if request.method == 'POST':
+    nombre = request.form['nombre']
+    descripcion = request.form['descripcion']
+    codigoInicial = request.form['codigo']
+    fechaEntrega = request.form['fecha']
+    pruebasJson = request.form.get('pruebas', None)
+
+    try:
+      idEjercicio = insertar_ejercicio(id_aula, nombre, descripcion, codigoInicial, fechaEntrega)
+    
+      if pruebasJson is not None:
+        pruebas = json.loads(pruebasJson)
+        
+        for prueba in pruebas:
+          insertar_prueba(idEjercicio, prueba['nombreFuncion'], prueba['entrada'], prueba['salida'])
+    except Exception as e:
+      print('An error has ocurried ', str(e))
+
+  return render_template('ejercicios/crear-ejercicio.html', id_aula=id_aula)
+
+@ejercicios_bp.route('/aulas/<id_aula>/ejercicios/<id_ejercicio>/editar', methods=['GET', 'POST'])
+def editar(id_aula, id_ejercicio):
+  if request.method == 'POST':
+    nombre = request.form['nombre']
+    descripcion = request.form['descripcion']
+    codigoInicial = request.form['codigo']
+    fechaEntrega = request.form['fecha']
+    pruebasJson = request.form.get('pruebas', None)
+
+    try:
+      editar_ejercicio(id_ejercicio, nombre, descripcion, codigoInicial, fechaEntrega)
+      
+      if pruebasJson is not None:
+        pruebas = json.loads(pruebasJson)
+        
+        for prueba in pruebas:
+          if 'idPrueba' in prueba and prueba['idPrueba'] != '':
+            editar_prueba(prueba['idPrueba'], prueba['nombreFuncion'], prueba['entrada'], prueba['salida'])
+          else:
+            insertar_prueba(id_ejercicio, prueba['nombreFuncion'], prueba['entrada'], prueba['salida'])
+    except Exception as e:
+      print('An error has ocurried ', str(e))
+  
+  ejercicio = consultar_ejercicio(id_ejercicio)
+
+  pruebas = consultar_pruebas(id_ejercicio) 
+  
+  return render_template('ejercicios/editar-ejercicio.html', ejercicio=ejercicio, pruebas=pruebas, id_aula=id_aula, id_ejercicio=id_ejercicio)
+
+@ejercicios_bp.route('/aulas/<id_aula>/ejercicios/<id_ejercicio>/eliminar')
+def eliminar(id_aula, id_ejercicio):
+  try:
+    eliminar_ejercicio(id_ejercicio)
+  except Exception as e:
+    print('An error has ocurried ', str(e))
+  
+  return redirect(url_for('aulas_bp.aula', id_aula=id_aula))
+
+@ejercicios_bp.route('/aulas/<id_aula>/ejercicios/<id_ejercicio>/guardar-notas', methods=['POST'])
+def guardar_notas(id_aula, id_ejercicio):
+  usuarios = request.form.getlist('id-usuario')
+  
+  # El idsUsuario tiene la estructura de "idUsuario_idCodigo"
+  for idsUsuario in usuarios:
+    partes = idsUsuario.split('-')
+    idUsuario = partes[0] 
+    idCodigo = partes[1]
+    
+    nota = request.form.get(f'nota-{idUsuario}', 0)
+    print(request.form)
+    # Si el idCodigo es vacío, significa que no hay código asociado al usuario
+    if idCodigo == 'None':
+      try:
+        # Insertar un nuevo código para el usuario
+        idCodigo = insertar_codigo(idUsuario, id_ejercicio, nota)
+      except Exception as e:
+        print('An error has ocurried ', str(e))
+    else:
+      try:
+        darNota(idCodigo, nota)
+      except Exception as e:
+        print('An error has ocurried ', str(e))
+
+  return redirect(url_for('ejercicios_bp.ejercicio', id_aula=id_aula, id_ejercicio=id_ejercicio))
