@@ -1,0 +1,186 @@
+.top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary);
+    padding: 15px 20px;
+    height: 70px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+}
+
+.app-logo {
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent);
+    border-radius: 50%;
+}
+
+.app-name {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--secondary);
+}
+
+.user-circle {
+    cursor: none;
+}
+
+.nav-right .user-circle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: var(--card);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-right .user-circle i {
+    color: var(--secondary);
+    font-size: 20px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 0%;
+    padding-top: 100%;
+    right: 0;
+    margin-top: 8px;
+    display: none;
+}
+
+.user-circle:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 10px 15px;
+    color: var(--secondary);
+    text-decoration: none;
+    transition: background-color 0.2s;
+    background-color: var(--card);
+    border-radius: 5px;
+    min-width: 150px;
+}
+
+.dropdown-item:hover {
+    background-color: var(--card);
+}
+
+.nav-item.home .icon-home{
+    font-size: 22px;
+}
+
+.sidebar {
+    width: 180px;
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.side-nav {
+    width: 100%;
+    height: 100%;
+}
+
+.side-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    color: var(--secondary);
+    gap: 5px;
+    width: 100%;
+}
+
+.nav-item:hover {
+    background-color: var(--card);
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: var(--secondary);
+    font-size: inherit;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-item.home a {
+    width: 100%;
+}
+
+.class-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.empty-square{
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--primary);
+    border-radius: 5px;
+    background-color: inherit;
+}
+
+.class1 .class-icon{
+    background-color: var(--accent);
+}
+
+.class2 .class-icon{
+    background-color: var(--success);
+}
+
+.class3 .class-icon{
+    background-color: var(--accent);
+}
+
+.divisor {
+    display: block;
+    min-width: 100%;
+    width: 100%;
+    min-height: 2px;
+    background-color: var(--card);
+    margin: 10px 0;
+}
+
+.sidebar-class-title{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px 0;
+}

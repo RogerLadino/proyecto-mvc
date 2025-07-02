@@ -1,0 +1,309 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: calc(100vh - 70px);
+  max-height: calc(100vh - 70px);
+}
+
+.main-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+/* Sólo es usado en codigo-profesor.html */
+
+.main-editor-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.editor-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: var(--primary);
+  border-right: 1px solid var(--card);
+  border-top: 1px solid var(--card);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* El nombre del ejercicio */
+
+.nav-item-header {
+  font-weight: 600;
+}
+
+.nav-item:hover {
+  background-color: var(--card);
+}
+
+.nav-item i {
+  font-size: 22px;
+}
+
+.main-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid var(--card);
+}
+
+.editor-section {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  height: 100%;
+  width: 50%;
+}
+
+.editor-section>* {
+  padding: 5px;
+}
+
+/* Titulo del editor */
+
+.editor-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.editor-title>* {
+  display: flex;
+  gap: 5px;
+}
+
+.editor-title-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.editor-title-item i {
+  font-size: 20px;
+}
+
+.editor-title-item p {
+  font-weight: 600;
+}
+
+.editor-body {
+  padding: 10px;
+}
+
+/* Código */
+
+.code-textarea {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.code-textarea textarea {
+  flex: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: var(--primary);
+}
+
+.code {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--card);
+}
+
+/* Información del estudiante */
+
+.student-icon {
+  font-size: 14px !important;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.student-icon.attempts {
+  font-size: 12px !important;
+}
+
+.student-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 5px;
+  border-bottom: 1px solid var(--card);
+}
+
+.student-info-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 0;
+}
+
+.note-input {
+  width: 38px;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Pestañas */
+
+.tabs {
+  display: flex;
+  flex: 1;
+  width: 50%;
+  padding: 8px 0;
+  max-height: 100%;
+}
+
+.tab {
+  cursor: pointer;
+}
+
+.tab-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-height: 32px;
+}
+
+.tab-content {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+}
+
+.tab-item {
+  width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.analysis.tab-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 72vh;
+  gap: 10px;
+}
+
+.console-icon {
+  font-size: 12px !important;
+  width: 18px;
+  height: 18px;
+}
+
+.console-title {
+  margin-top: auto;
+  margin-left: auto;
+}
+
+#editor {
+  background-color: var(--primary);
+}
+
+#editor .ace_gutter {
+  background: var(--primary);  
+}
+
+/* Estilo para la tabla de resultados de pruebas en la consola */
+.resultado-prueba {
+  margin-bottom: 18px;
+  background: var(--primary);
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.resultado-prueba > div:first-child {
+  font-size: 1.08em;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.resultado-prueba .tabla-resultados table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  background: var(--card);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.resultado-prueba .tabla-resultados th,
+.resultado-prueba .tabla-resultados td {
+  padding: 6px 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--primary);
+}
+
+.resultado-prueba .tabla-resultados th {
+  background: var(--primary);
+  font-weight: 600;
+}
+
+.resultado-prueba .tabla-resultados tr:last-child td {
+  border-bottom: none;
+}
+
+.resultado-prueba pre {
+  background: var(--card);
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 4px;
+  margin: 6px 0 0 0;
+  font-size: 0.98em;
+  white-space: pre-wrap;
+}
+
+.resultado-prueba hr {
+  border: none;
+  border-top: 1px solid var(--card);
+  margin: 12px 0 0 0;
+}
+
+.test-status{
+  font-size: 16px;
+}

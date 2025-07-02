@@ -1,0 +1,2 @@
+# Ignora carpetas de compilación de Python
+__pycache__/

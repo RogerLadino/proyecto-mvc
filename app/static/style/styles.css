@@ -1,0 +1,191 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  background-color: #231f20;
+  color: #fff;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: transparent;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.small-circle {
+  width: 30px;
+  height: 30px;
+  background-color: #f77f72;
+  border-radius: 50%;
+}
+
+.topbar-right button {
+  margin-left: 0.5rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 70px);
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  padding: 50px 0;
+}
+
+.header-text h1 {
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.cta-btn {
+  background-color: #f77f72;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.big-circle {
+  width: 250px;
+  height: 250px;
+  background-color: #f77f72;
+  border-radius: 50%;
+}
+
+.advantages {
+  margin-top: 40px;
+  padding: 0 40px;
+}
+
+.ventajas h2 {
+  color: white;
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  /* Quita la negrita */
+  text-align: center;
+}
+
+
+.ventaja-items {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.ventaja-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  max-width: 150px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.icono {
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 1rem;
+}
+
+.icon-box {
+  flex: 1;
+  min-width: 100px;
+}
+
+.icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #f77f72;
+}
+
+.editor,
+.tasks {
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.editor h2,
+.tasks h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.editor-box,
+.task-box {
+  border-radius: 5px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.small-btn {
+  background-color: #f77f72;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.registro-btn {
+  margin-top: 40px;
+  display: inline-block;
+  background-color: #f77f72;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+}

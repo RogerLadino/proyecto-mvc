@@ -1,0 +1,206 @@
+
+
+.titulo-clase,
+.titulo-clase-alumno {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px;
+  background-color: var(--accent);
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+.titulo-clase-alumno {
+  background-color: var(--success);
+}
+
+.lista-ejercicios {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  flex-direction: column
+}
+
+.titulo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  border: 5px solid var(--primary);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.titulo-clase i {
+  font-size: 28px;
+  color: var(--primary);
+}
+
+.titulo h1 {
+  font-size: 28px;
+}
+
+.cuadrado {
+  min-width: 25px;
+  min-height: 25px;
+  border: 3px solid var(--primary);
+  border-radius: 5px;
+}
+
+.contenedor-ejercicios {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  margin-top: 10px;
+}
+
+.proximos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--card);
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.proximos h3 {
+  padding: 10px;
+}
+
+.proximo-ejercicio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 5px;
+  width: auto;
+  min-width: 170px;
+  height: 100%;
+  font-weight: bold;
+  padding: 5px 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.proximo-ejercicio .circulo {
+  color: var(--success);
+  font-size: 26px;
+}
+
+.proximo-ejercicio:hover {
+  background-color: var(--accent);
+}
+
+.icono-accent {
+  color: var(--accent);
+}
+
+.icono-success {
+  color: var(--success);
+}
+
+.ejercicios {
+  width: 100%;
+  height: 100%;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ejercicio {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  background-color: var(--card);
+  padding: 15px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.ejercicio a {
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.ejercicio a:hover {
+  color: var(--accent);
+}
+
+.fecha {
+  margin-left: auto;
+}
+
+.codigo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--card);
+  border-radius: 8px;
+  padding: 10px 20px;
+}
+
+.codigo div {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.icono-codigo {
+  cursor: pointer;
+}
+
+.icono-codigo-profesor{
+  margin-left: auto;
+}
+
+.botones {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  padding: 0 0 10px 0;
+  gap: 10px;
+}
+
+.clase-boton{
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 2px;
+  padding: 10px 10px;
+  background-color: var(--card);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.clase-boton:hover {
+  background-color: var(--accent);
+}
+
+.boton-editar-clase{
+  margin-left: auto;
+}

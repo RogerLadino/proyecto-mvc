@@ -1,0 +1,174 @@
+.main-container {
+    display: flex;
+    height: calc(100vh - 70px);
+}
+
+.main-content {
+    flex: 1;
+    padding: 0 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Titulo del ejercicio */
+
+.exercise-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.title-buttons {
+    display: flex;
+    gap: 10px;
+    height: 100%;
+    margin-left: auto;
+}
+
+.exercise-header>i {
+    font-size: 30px;
+    color: var(--accent);
+}
+
+.exercise-header span {
+    font-size: 28px;
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+/* Contenedor del ejercicio */
+
+.exercise-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+}
+
+.exercise-content {
+    flex: 2;
+    text-align: justify;
+}
+
+.date-info {
+    text-align: right;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.exercise-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Estadísticas del alumno */
+
+.statistics {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.statistic {
+    height: 100%;
+    width: 100%;
+}
+
+.statistic td {
+    padding: 15px 10px;
+    border: 1px solid var(--card);
+}
+
+.statistic-label {
+    color: var(--secondary);
+    gap: 5px;
+}
+
+@media (max-width: 800px) {
+    .exercise-container {
+        flex-direction: column;
+    }
+}
+
+
+
+/* Contenedor del botón de editar clase */
+
+.title-button-container {
+    display: flex;
+    width: 150px;
+    height: 100%;
+    margin-left: auto;
+    text-decoration: none;
+}
+
+.button-link {
+    width: 100%;
+}
+
+.note-input {
+    width: 36px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Input de fecha */
+
+.date-input {
+    background-color: var(--card);
+    border: 2px solid transparent;
+    padding: 10px;
+    padding-left: 25px;
+    border-radius: 5px;
+    color: var(--secondary);
+    font-size: 16px;
+    width: 100%;
+    transition: border-color 0.2s ease;
+    cursor: pointer;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+.date-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+/* Contenedor del código */
+
+.code-container {
+    background-color: var(--card);
+    border-radius: 5px;
+}
+
+.code-header {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+
+.code-editor {
+    width: 100%;
+    min-height: 200px;
+    background-color: var(--card);
+    border: none;
+    color: var(--secondary);
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 5px 15px;
+    resize: vertical;
+}
+
+.code-editor:focus {
+    outline: none;
+}

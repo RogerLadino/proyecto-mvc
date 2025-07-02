@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/general.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='icons/icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/navigation.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/ejercicio.css') }}">
+</head>
+
+<body>
+  <nav class="top-navbar">
+    <div class="nav-left">
+      <a href="clases.html" class="logo-link">
+        <div class="app-logo"></div>
+        <h1 class="app-name">Nombre</h1>
+      </a>
+    </div>
+    <div class="nav-right">
+      <div class="user-circle">
+        <i class="icon-user"></i>
+        <div class="dropdown-menu">
+          <a href="index.html" class="dropdown-item">Cerrar sesión</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <aside class="sidebar">
+      <nav class="side-nav">
+        <ul>
+          <i class="divisor"></i>
+          <li class="nav-item home">
+            <a href="clases.html">
+              <i class="icon-home"></i>
+              <span>Inicio</span>
+            </a>
+          </li>
+          <i class="divisor"></i>
+          <li class="nav-item class1">
+            <div class="class-icon">
+              <i class="empty-square"></i>
+            </div>
+            <a href="lista-ejercicios-profesor.html">Clase 1</a>
+          </li>
+          <li class="nav-item class2">
+            <div class="class-icon">
+              <i class="empty-square"></i>
+            </div>
+            <a href="lista-ejercicios.html">Clase 2</a>
+          </li>
+          <li class="nav-item class3">
+            <div class="class-icon">
+              <i class="empty-square"></i>
+            </div>
+            <span>Clase 3</span>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="exercise-header">
+        <i class="icon-circle-empty"></i>
+        <span class="ejercicio-titulo">{{ejercicio.nombre}}</span>
+      </div>
+
+      <div class="exercise-container">
+        <div class="exercise-content">
+          <p class="date-info">
+            {{ejercicio.fechaEntrega}}
+          </p>
+          <p class="descripcion-ejercicio">
+            {{ejercicio.descripcion}}
+          </p>
+        </div>
+        <div class="exercise-info">
+          <table class="statistics">
+            <tbody>
+              <tr class="statistic">
+                <td class="statistic-label">
+                  <i class="icon-circle-empty"></i>
+                  <span>Nota</span>
+                </td>
+                <td class="score">
+                  {% if codigo.notaObtenida %}
+                  {codigo.notaObtenida}/100
+                  {% else %}
+                  0/100
+                  {% endif %}
+                </td>
+              </tr>
+              <tr class="statistic">
+                <td class="statistic-label">
+                  <i class="icon-circle-empty"></i>
+                  <span>Resuelto</span>
+                </td>
+                <td>
+                  <div class="checkmark">
+                    {% if codigo.resuelto %}
+                    <i class="icon-check"></i>
+                    {% else %}
+                    <i class="icon-cancel"></i>
+                    {% endif %}
+                  </div>
+                </td>
+              </tr>
+              <tr class="statistic">
+                <td class="statistic-label">
+                  <i class="icon-circle-empty"></i>
+                  <span>A tiempo</span>
+                </td>
+                <td>
+                  <div class="clock">
+                    <i class="icon-clock"></i>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <a href="{{ url_for('ejercicios_bp.ejercicio', id_aula=id_aula, id_ejercicio=id_ejercicio) }}">
+            <button class="button">Ver código</button>
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
