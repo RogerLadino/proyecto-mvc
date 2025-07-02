@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+  <title>Registrarse</title>
+</head>
+<body>
+  <div class="container register-container">
+    <div class="header">
+      <div class="circle"></div>
+      <span class="brand">Nombre</span>
+    </div>
+    <h2>Registrarse</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} mt-2" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form class="form" action="{{ url_for('usuario_bp.registrar') }}" method="POST">
+      <div class="row g-3 mb-2">
+        <div class="col-6">
+          <label for="nombre1" class="form-label"><span class="dot"></span> Primer nombre</label>
+          <input type="text" id="nombre1" name="nombre1" class="form-control" required>
+        </div>
+        <div class="col-6">
+          <label for="nombre2" class="form-label"><span class="dot"></span> Segundo nombre</label>
+          <input type="text" id="nombre2" name="nombre2" class="form-control">
+        </div>
+      </div>
+      <div class="row g-3 mb-2">
+        <div class="col-6">
+          <label for="apellido1" class="form-label"><span class="dot"></span> Primer apellido</label>
+          <input type="text" id="apellido1" name="apellido1" class="form-control" required>
+        </div>
+        <div class="col-6">
+          <label for="apellido2" class="form-label"><span class="dot"></span> Segundo apellido</label>
+          <input type="text" id="apellido2" name="apellido2" class="form-control">
+        </div>
+      </div>
+      <div class="mb-2">
+        <label for="email" class="form-label"><span class="dot"></span> Email</label>
+        <input type="email" id="email" name="email" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label"><span class="dot"></span> Contraseña</label>
+        <input type="password" id="password" name="password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn w-100 submit-btn">Registrarse</button>
+      <p class="footer">
+        ¿Ya tienes una cuenta? <a href="{{ url_for('usuario_bp.iniciar_sesion') }}">Inicia sesión</a>
+      </p>
+    </form>
+  </div>
+  <script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
+</body>
+</html>

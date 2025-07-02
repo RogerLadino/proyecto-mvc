@@ -1,0 +1,123 @@
+/* Estilos base del cuerpo (sin cambios) */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1e1919;
+  color: white;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Contenedor principal con el ancho máximo original */
+.register-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  text-align: left;
+}
+
+/* Estilos del encabezado (sin cambios) */
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.circle {
+  width: 28px;
+  height: 28px;
+  background-color: #ff6e6e;
+  border-radius: 50%;
+}
+
+.brand {
+  font-size: 13px;
+  color: white;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+/* Ajustes a etiquetas de formulario */
+.form-label {
+  font-size: 12px;
+  margin-bottom: 4px; /* Mantenemos el margen original */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ---- ESTILOS SOBRESCRITOS DE BOOTSTRAP ---- */
+
+/* Inputs personalizados para que coincidan con el diseño original */
+.form-control {
+  background-color: #2d2727;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: white;
+  font-size: 14px;
+}
+
+/* Estilo al seleccionar un input (focus) para eliminar el borde azul de Bootstrap */
+.form-control:focus {
+  background-color: #2d2727;
+  color: white;
+  border-color: #4d4444; /* Un borde sutil que combina con el tema */
+  box-shadow: none; /* MUY IMPORTANTE: Elimina el resplandor de Bootstrap */
+}
+
+/* Placeholder por si se añade en el futuro */
+.form-control::placeholder {
+  color: #a0a0a0;
+}
+
+
+/* Círculo decorativo en la etiqueta (sin cambios) */
+.dot {
+  width: 10px;
+  height: 10px;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Botón de envío con estilos originales */
+.submit-btn {
+  background-color: #3a3333;
+  color: white;
+  border: none;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  
+  /* Se sobreescribe cualquier estilo de .btn que no queramos */
+  --bs-btn-hover-bg: #4a4444; /* Color hover personalizado */
+  --bs-btn-hover-border-color: #4a4444;
+  --bs-btn-active-bg: #2d2727; /* Color al hacer clic */
+  --bs-btn-active-border-color: #2d2727;
+  --bs-btn-focus-shadow-rgb: none; /* Elimina sombra de focus en botón */
+}
+
+
+/* Pie del formulario (sin cambios) */
+.footer {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+.footer a {
+  font-weight: bold;
+  color: white;
+  text-decoration: underline;
+}

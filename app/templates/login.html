@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar Sesión</title>
+  
+  <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+</head>
+<body>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        
+        <a href="#" class="logo"> <div class="circle"></div>
+          <span class="logo-text">Nombre</span>
+        </a>
+
+        <h1 class="text-center">Iniciar Sesión</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} mt-3" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        
+        <form action="{{ url_for('usuario_bp.iniciar_sesion') }}" method="POST">
+          <div class="mb-3 text-start">
+            <label for="user-email" class="form-label">
+              <span class="dot"></span>
+              <span class="label-text">Email</span>
+            </label>
+            <input 
+              type="email" 
+              class="form-control"
+              id="user-email"
+              name="email" required 
+            />
+          </div>
+
+          <div class="mb-3 text-start">
+            <label for="user-password" class="form-label">
+              <span class="dot"></span>
+              <span class="label-text">Contraseña</span>
+            </label>
+            <input 
+              type="password" 
+              class="form-control"
+              id="user-password"
+              name="password" required
+            />
+          </div>
+
+          <div class="d-grid gap-2 col-8 mx-auto">
+            <button type="submit" class="btn mt-3">Iniciar sesión</button>
+          </div>
+        </form>
+
+        <p class="footer-text text-center mt-4">
+          ¿No tienes una cuenta? <a href="{{ url_for('usuario_bp.registrar') }}">Regístrate!</a>
+          <br />
+          ¿Olvidaste tu contraseña? <a href="#">Recupérala!</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/features/acceso/acceso.login.js') }}"></script>
+</body>
+</html>
