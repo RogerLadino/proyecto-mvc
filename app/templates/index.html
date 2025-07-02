@@ -1,16 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proyecto Grupal</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='icons/icons.css') }}">
-</head>
+  <title>Prototipo Navegable</title>
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
 
 <body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="circle small-circle"></div>
+      <span>Nombre</span>
+    </div>
+    <div class="topbar-right">
+      <a href="{{ url_for('usuario_bp.iniciar_sesion') }}" class="small-btn">Iniciar Sesión</a>
+      <a href="{{ url_for('usuario_bp.registrar') }}" class="small-btn">Registrarse</a>
+    </div>
+  </div>
+
+  <main class="container">
+    <header class="hero">
+      <div class="header-text">
+        <h1>Evalúa mejor,<br> más rápido, <br> más justo</h1>
+        <a href="{{ url_for('usuario_bp.registrar') }}" class="cta-btn">Regístrate</a>
+      </div>
+      <div class="circle big-circle"></div>
+    </header>
+
+    <section class="advantages">
+      <section class="ventajas">
+        <h2>Ventajas</h2>
+        <div class="ventaja-items">
+          </div>
+      </section>
+    </section>
+
+    <section class="editor">
+      <h2>Editor De Código</h2>
+      <div class="editor-box">
+        <img src="{{ url_for('static', filename='img/img1.png') }}" alt="Editor de código">
+      </div>
+    </section>
+
+    <section class="tasks">
+      <h2>Tareas</h2>
+      <div class="task-box">
+        <img src="{{ url_for('static', filename='img/img2.png') }}" alt="Editor de código">
+      </div>
+    </section>
+
+    <section class="editor">
+      <h2>Reportes</h2>
+      <div class="task-box">
+        <img src="{{ url_for('static', filename='img/img3.png') }}" alt="Editor de código">
+      </div>
+    </section>
+
+    <footer>
+      <p>¿Listo para empezar?</p>
+      <a href="{{ url_for('usuario_bp.registrar') }}" class="registro-btn">Regístrate</a>
+    </footer>
+  </main>
 </body>
 
 </html>
