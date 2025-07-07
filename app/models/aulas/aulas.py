@@ -16,3 +16,18 @@ def es_profesor(id_usuario, id_aula):
   if aula['idUsuario'] == id_usuario:
     return True
   return False
+
+def obtener_aulas_sidebar(id_usuario, id_rol):
+  connection = current_app.connection
+  
+  with connection.cursor() as cursor:
+    cursor.execute("""
+      SELECT * 
+      FROM usuario_aula ua 
+      JOIN aulas a ON a.idUsuario = ua.idUsuario
+      WHERE a.idUsuario = %s AND idRol = %s
+    """, (id_usuario, id_rol))
+    
+    return cursor.fetchall()
+
+  return []
