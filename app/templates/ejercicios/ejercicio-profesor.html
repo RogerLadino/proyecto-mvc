@@ -97,14 +97,14 @@
         <tbody class="table-body">
           {% for usuario in estadisticas %}
           <tr class="table-row usuario">
-            <input type="hidden" name="id-usuario" value="{{ usuario.idUsuario }}-{{ usuario.idCodigo }}">
+            <input type="hidden" name="id_usuario" value="{{ usuario.idUsuario }}">
             <td>
               <i class="icon-circle icon-warning"></i>
               {{ usuario.nombre1 }} {{ usuario.apellido1 }}
             </td>
             <td>
               <input name="nota-{{ usuario.idUsuario }}" type="text" class="underline-input note-input"
-                value="{{ usuario.notaObtenida if usuario.notaObtenida is not none else '' }}">/100
+                value="{{ usuario.notaObtenida if usuario.notaObtenida is not none else 0 }}">/100
             </td>
             <td>
               <div class="attempts">{{ usuario.intentosRealizados if usuario.intentosRealizados is not none else 0 }}

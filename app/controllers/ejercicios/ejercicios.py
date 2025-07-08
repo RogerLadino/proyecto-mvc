@@ -43,6 +43,8 @@ def crear(id_aula):
           insertar_prueba(idEjercicio, prueba['nombreFuncion'], prueba['entrada'], prueba['salida'])
     except Exception as e:
       print('An error has ocurried ', str(e))
+    
+    return redirect(url_for('ejercicios_bp.ejercicio', id_aula=id_aula, id_ejercicio=idEjercicio))
 
   return render_template('ejercicios/crear-ejercicio.html', id_aula=id_aula)
 
@@ -68,6 +70,8 @@ def editar(id_aula, id_ejercicio):
             insertar_prueba(id_ejercicio, prueba['nombreFuncion'], prueba['entrada'], prueba['salida'])
     except Exception as e:
       print('An error has ocurried ', str(e))
+
+    return redirect(url_for('ejercicios_bp.ejercicio', id_aula=id_aula, id_ejercicio=id_ejercicio))
   
   ejercicio = consultar_ejercicio(id_ejercicio)
 
@@ -86,26 +90,23 @@ def eliminar(id_aula, id_ejercicio):
 
 @ejercicios_bp.route('/aulas/<id_aula>/ejercicios/<id_ejercicio>/guardar-notas', methods=['POST'])
 def guardar_notas(id_aula, id_ejercicio):
-  usuarios = request.form.getlist('id-usuario')
+  usuarios = request.form.getlist('id_usuario')
   
-  # El idsUsuario tiene la estructura de "idUsuario_idCodigo"
-  for idsUsuario in usuarios:
-    partes = idsUsuario.split('-')
-    idUsuario = partes[0] 
-    idCodigo = partes[1]
-    
+  for idUsuario in usuarios:
     nota = request.form.get(f'nota-{idUsuario}', 0)
-    print(request.form)
+
+    codigo = consultar_codigo(idUsuario, id_ejercicio)
+    
     # Si el idCodigo es vacío, significa que no hay código asociado al usuario
-    if idCodigo == 'None':
+    if codigo is None:
       try:
         # Insertar un nuevo código para el usuario
-        idCodigo = insertar_codigo(idUsuario, id_ejercicio, nota)
+        insertar_codigo(idUsuario, id_ejercicio, nota)
       except Exception as e:
         print('An error has ocurried ', str(e))
     else:
       try:
-        darNota(idCodigo, nota)
+        darNota(idUsuario, id_ejercicio,nota)
       except Exception as e:
         print('An error has ocurried ', str(e))
 

@@ -46,13 +46,13 @@ def consultar_usuarios_con_codigo(id_ejercicio):
         
     return cursor.fetchall() 
 
-def insertar_codigo(idUsuario, idEjercicio, notaObtenida = 0):
+def insertar_codigo(idUsuario, idEjercicio, notaObtenida):
   connection = current_app.connection
     
   with connection.cursor() as cursor:
     cursor.execute("""
       INSERT INTO codigo (idUsuario, idEjercicio, codigo, notaObtenida, resuelto, intentosRealizados, fechaEntrega, idTipoLenguaje)
-      VALUES (%s, %s, '', 0, %s, 0, '0000-00-00 00:00:00', 'python')
+      VALUES (%s, %s, '', %s, 0, 0, '0000-00-00 00:00:00', 'python')
     """, (idUsuario, idEjercicio, notaObtenida))
         
     connection.commit()
@@ -73,14 +73,14 @@ def actualizar_codigo(idCodigo, nuevoCodigo):
     
     return cursor.lastrowid 
 
-def darNota(idCodigo, nota):
+def darNota(idUsuario, idEjercicio, nota):
   connection = current_app.connection
     
   with connection.cursor() as cursor:
     cursor.execute("""
       UPDATE codigo
       SET notaObtenida = %s
-      WHERE idCodigo = %s
-    """, (nota, idCodigo))
+      WHERE idUsuario = %s AND idEjercicio = %s
+    """, (nota, idUsuario, idEjercicio))
         
     connection.commit()

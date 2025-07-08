@@ -11,9 +11,16 @@ def consultar_aula(id_aula):
     return cursor.fetchone()
 
 def es_profesor(id_usuario, id_aula):
-  aula = consultar_aula(id_aula)
+  connection = current_app.connection
+  
+  with connection.cursor() as cursor:
+    cursor.execute("""
+      SELECT * FROM usuario_aula WHERE idAula = %s AND idRol = 1
+    """, (id_aula))
     
-  if aula['idUsuario'] == id_usuario:
+    usuarioAula = cursor.fetchone()
+    
+  if usuarioAula['idUsuario'] == id_usuario:
     return True
   return False
 

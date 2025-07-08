@@ -16,10 +16,11 @@ def consultar_estadisticas_ejercicio(id_ejercicio, id_aula):
     
   with connection.cursor() as cursor:
     cursor.execute("""
-      SELECT u.idUsuario, u.nombre1, u.apellido1, c.idCodigo, c.notaObtenida, c.resuelto, c.intentosRealizados, c.fechaEntrega
-      FROM codigo c 
-      RIGHT JOIN usuario_has_aula ua ON c.idUsuario = ua.idUsuario AND c.idEjercicio = %s
+      SELECT u.idUsuario, u.nombre1, u.apellido1, c.notaObtenida, c.resuelto, c.intentosRealizados, c.fechaEntrega
+      FROM codigo c
+      RIGHT JOIN usuario_aula ua ON c.idUsuario = ua.idUsuario AND c.idEjercicio = %s 
       LEFT JOIN usuario u ON ua.idUsuario = u.idUsuario AND ua.idAula = %s
+      WHERE ua.idRol = 2
     """, (id_ejercicio, id_aula))
         
     return cursor.fetchall()
