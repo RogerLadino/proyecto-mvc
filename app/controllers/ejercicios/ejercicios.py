@@ -1,13 +1,26 @@
 import json
 from flask import Blueprint, render_template, request, redirect, url_for, session
 
-from app.models.ejercicios.ejercicios import (insertar_ejercicio, consultar_ejercicio, editar_ejercicio, eliminar_ejercicio, consultar_estadisticas_ejercicio)
+from app.models.ejercicios.ejercicios import (insertar_ejercicio, consultar_ejercicio, editar_ejercicio, eliminar_ejercicio, consultar_estadisticas_ejercicio, consultar_ejercicios_por_aula)
 from app.models.pruebas.pruebas import (insertar_prueba, consultar_pruebas, editar_prueba)
 from app.models.codigo.codigo import (consultar_codigo, darNota, insertar_codigo)
 from app.services.usuario import (obtener_sesion_id_usuario)
-from app.models.aulas.aulas import es_profesor
+from app.models.aulas.aulas import (es_profesor, consultar_aula)
 
 ejercicios_bp = Blueprint('ejercicios_bp', __name__)
+
+@ejercicios_bp.route('/aulas/<id_aula>/ejercicios', methods=['GET'])
+def ejercicios(id_aula):
+  idUsuario = obtener_sesion_id_usuario()
+
+  ejercicios = consultar_ejercicios_por_aula(id_aula)
+
+  aula = consultar_aula(id_aula)
+  
+  if es_profesor(idUsuario, id_aula):
+    return render_template('ejercicios/lista-ejercicios-profesor.html', id_aula=id_aula, ejercicios=ejercicios, aula=aula)
+
+  return render_template('ejercicios/lista-ejercicios.html', id_aula=id_aula, ejercicios=ejercicios, aula=aula)
 
 @ejercicios_bp.route('/aulas/<id_aula>/ejercicios/<id_ejercicio>', methods=['GET'])
 def ejercicio(id_aula, id_ejercicio):

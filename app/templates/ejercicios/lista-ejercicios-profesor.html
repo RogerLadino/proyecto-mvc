@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/general.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='icons/icons.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/navigation.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/lista-ejercicios.css') }}" />
+  </head>
+
+  <body>
+    <nav class="top-navbar">
+      <div class="nav-left">
+        <a href="clases.html" class="logo-link">
+          <div class="app-logo"></div>
+          <h1 class="app-name">Nombre</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <div class="user-circle">
+          <i class="icon-user"></i>
+          <div class="dropdown-menu">
+            <a href="index.html" class="dropdown-item">Cerrar sesión</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-container">
+      <aside class="sidebar">
+        <nav class="side-nav">
+          <ul>
+            <i class="divisor"></i>
+            <li class="nav-item home">
+              <a href="clases.html">
+                <i class="icon-home"></i>
+                <span>Inicio</span>
+              </a>
+            </li>
+            <i class="divisor"></i>
+            <li class="nav-item class1">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <a href="lista-ejercicios-profesor.html">Clase 1</a>
+            </li>
+            <li class="nav-item class2">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <a href="lista-ejercicios.html">Clase 2</a>
+            </li>
+            <li class="nav-item class3">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <span>Clase 3</span>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <div class="titulo-clase">
+          <div class="titulo">
+            <div class="cuadrado"></div>
+            <h1 class="nombre-clase">{{ aula.nombre }}</h1>
+            <strong class="nombre-profesor"></strong>
+          </div>
+        </div>
+        <div class="contenedor-ejercicios">
+          <div class="codigo">
+            <h3 style="display: flex;">
+              Código
+              <a class="icon-pencil" href="#"></a>
+            </h3>
+            <div>
+              <p class="codigo-clase">{{ aula.codigo }}</p>
+            </div>
+          </div>
+          <div class="ejercicios">
+            <div class="botones">
+              <a class="clase-boton" href="{{ url_for('ejercicios_bp.crear', id_aula=id_aula) }}">
+                <i class="icon-plus"></i>
+                <span>Nuevo Ejercicio</span>
+              </a>
+              <a class="clase-boton" href="reportes.html">
+                <i class="icon-chart-bar"></i>
+                <span>Calificaciones</span>
+              </a>
+              <a class="clase-boton boton-editar-clase" href="#">
+                <i class="icon-pencil"></i>
+                <span>Editar Clase</span>
+              </a>
+            </div>
+            <div id="lista-ejercicios-profesor" class="lista-ejercicios">
+              {% for ejercicio in ejercicios %}
+                <div class="ejercicio">
+                  <i class="circulo icon-circle-empty icono-accent"></i>
+                  <p>{{ ejercicio.nombre }}</p>
+                  <p class="fecha">{{ ejercicio.fechaEntrega }}</p>
+                  <a class="icon-right" href="{{ url_for('ejercicios_bp.ejercicio', id_aula=id_aula, id_ejercicio=ejercicio.idEjercicio) }}"></a>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

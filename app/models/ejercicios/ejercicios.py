@@ -11,6 +11,17 @@ def consultar_ejercicio(id_ejercicio):
         
     return cursor.fetchone()
 
+def consultar_ejercicios_por_aula(id_aula):
+  connection = current_app.connection
+    
+  with connection.cursor() as cursor:
+    cursor.execute("""
+      SELECT * FROM ejercicio WHERE idAula = %s
+    """, (id_aula))
+        
+    return cursor.fetchall()
+  return []
+
 def consultar_estadisticas_ejercicio(id_ejercicio, id_aula):
   connection = current_app.connection
     
