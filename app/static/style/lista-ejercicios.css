@@ -115,7 +115,6 @@
 .ejercicios {
   width: 100%;
   height: 100%;
-  padding: 0 10px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -127,8 +126,6 @@
   justify-content: flex-start;
   flex-direction: row;
   gap: 5px;
-  width: 100%;
-  height: 100%;
   font-size: 18px;
   background-color: var(--card);
   padding: 15px 10px;
@@ -137,6 +134,7 @@
 }
 
 .ejercicio a {
+  color: white;
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -152,10 +150,8 @@
 .codigo {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   background-color: var(--card);
-  border-radius: 8px;
-  padding: 10px 20px;
 }
 
 .codigo div {
@@ -175,7 +171,6 @@
 .botones {
   display: flex;
   width: 100%;
-  height: 100%;
   flex-direction: row;
   padding: 0 0 10px 0;
   gap: 10px;
@@ -183,7 +178,7 @@
 
 .clase-boton{
   width: auto;
-  height: auto;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;

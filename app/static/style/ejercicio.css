@@ -82,6 +82,8 @@
 .statistic td {
     padding: 15px 10px;
     border: 1px solid var(--card);
+    background: transparent;
+    color: white;
 }
 
 .statistic-label {
@@ -102,7 +104,6 @@
 .title-button-container {
     display: flex;
     width: 150px;
-    height: 100%;
     margin-left: auto;
     text-decoration: none;
 }

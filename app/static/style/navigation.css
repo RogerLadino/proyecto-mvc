@@ -86,7 +86,6 @@
 }
 
 .sidebar {
-    width: 180px;
     background-color: var(--primary);
     display: flex;
     flex-direction: column;

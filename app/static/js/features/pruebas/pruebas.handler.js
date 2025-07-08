@@ -79,7 +79,7 @@ export const crearElementoPrueba = () => {
           <span>Prueba</span>
         </div>
         <i class="icon-trash" onmousedown="eliminarElementoPrueba(event)"></i>
-        <i class="icon-down-dir dropdown-toggle" onclick="toggleDropdown(event)"></i>
+        <i class="dropdown-toggle" onclick="toggleDropdown(event)"></i>
       </div>
       <div class="test-main-content">
         <div class="test-content">
@@ -153,7 +153,7 @@ export const cargarPruebas = (pruebas) => {
             <span>Prueba</span>
           </div>
           <i class="icon-trash" onmousedown="eliminarElementoPrueba(event)"></i>
-          <i class="icon-down-dir dropdown-toggle" onclick="toggleDropdown(event)"></i>
+          <i class="dropdown-toggle" onclick="toggleDropdown(event)"></i>
         </div>
         <div class="test-main-content">
           <div class="test-content">
@@ -225,7 +225,7 @@ export const mostrarPruebas = () => {
           <div class="test-title">
             <span>Prueba</span>
           </div>
-          <i class="icon-down-dir dropdown-toggle" onclick="toggleDropdown(event)"></i>
+          <i class="dropdown-toggle" onclick="toggleDropdown(event)"></i>
         </div>
         <div class="test-main-content">
           <div class="test-content">

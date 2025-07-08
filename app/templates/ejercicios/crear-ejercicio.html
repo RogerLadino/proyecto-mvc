@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ejercicio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style/general.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='icons/icons.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style/navigation.css') }}">
@@ -30,107 +31,107 @@
     </div>
   </nav>
 
-  <div class="main-container">
-    <aside class="sidebar">
-      <nav class="side-nav">
-        <ul>
-          <i class="divisor"></i>
-          <li class="nav-item home">
-            <a href="clases.html">
-              <i class="icon-home"></i>
-              <span>Inicio</span>
-            </a>
-          </li>
-          <i class="divisor"></i>
-          <li class="nav-item class1">
-            <div class="class-icon">
-              <i class="empty-square"></i>
+  <div class="container-fluid m-0 p-0">
+    <div class="row m-0 p-0">
+      <aside class="col-2 sidebar">
+        <nav class="side-nav h-100">
+          <ul class="list-unstyled">
+            <i class="divisor"></i>
+            <li class="nav-item home">
+              <a href="clases.html">
+                <i class="icon-home"></i>
+                <span>Inicio</span>
+              </a>
+            </li>
+            <i class="divisor"></i>
+            <li class="nav-item class1">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <a href="lista-ejercicios-profesor.html">Clase 1</a>
+            </li>
+            <li class="nav-item class2">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <a href="lista-ejercicios.html">Clase 2</a>
+            </li>
+            <li class="nav-item class3">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <span>Clase 3</span>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="col-10">
+        <div class="row">
+          <div class="col-12">
+            <div class="exercise-header d-flex align-items-center gap-2 mb-4">
+              <i class="icon-circle-empty"></i>
+              <h2 class="mb-0">Crear Ejercicio</h2>
             </div>
-            <a href="lista-ejercicios-profesor.html">Clase 1</a>
-          </li>
-          <li class="nav-item class2">
-            <div class="class-icon">
-              <i class="empty-square"></i>
-            </div>
-            <a href="lista-ejercicios.html">Clase 2</a>
-          </li>
-          <li class="nav-item class3">
-            <div class="class-icon">
-              <i class="empty-square"></i>
-            </div>
-            <span>Clase 3</span>
-          </li>
-        </ul>
-      </nav>
-    </aside>
+            <form class="edit-form" id="form" method="post" action="{{ url_for('ejercicios_bp.crear', id_aula=id_aula) }}">
+              <div class="input mb-3">
+                <div class="input-label">
+                  <i class="icon-circle-empty"></i>
+                  <label>Nombre del ejercicio</label>
+                </div>
+                <input name="nombre" type="text" class="input-field" placeholder="Nombre del ejercicio" id="nombre">
+              </div>
 
-    <main class="main-content">
-      <div class="exercise-header">
-        <i class="icon-circle-empty"></i>
-        <h2>Crear Ejercicio</h2>
-      </div>
+              <div class="input mb-3">
+                <div class="input-label">
+                  <i class="icon-circle-empty"></i>
+                  <label>Descripción</label>
+                </div>
+                <textarea name="descripcion" class="textbox-field" placeholder="Descripción del ejercicio" id="descripcion"></textarea>
+              </div>
 
-      <form class="edit-form" id="form" method="post" action="{{ url_for('ejercicios_bp.crear', id_aula=id_aula) }}">
-        <div class="input">
-          <div class="input-label">
-            <i class="icon-circle-empty"></i>
-            <label>Nombre del ejercicio</label>
-          </div>
-          <input name="nombre" type="text" class="input-field" placeholder="Nombre del ejercicio" id="nombre">
-        </div>
+              <div class="input mb-3">
+                <div class="input-label">
+                  <i class="icon-circle-empty"></i>
+                  <label>Fecha de entrega</label>
+                </div>
+                <input name="fecha" type="datetime-local" class="date-input" id="fecha-entrega">
+              </div>
 
-        <div class="input">
-          <div class="input-label">
-            <i class="icon-circle-empty"></i>
-            <label>Descripción</label>
-          </div>
-          <textarea name="descripcion" class="textbox-field" placeholder="Descripción del ejercicio" id="descripcion"></textarea>
-        </div>
+              <div class="input mb-3">
+                <div class="input-label">
+                  <i class="icon-circle-empty"></i>
+                  <label>Código Inicial</label>
+                </div>
+                <div class="code-container">
+                  <div class="code-header mb-2">
+                    <select class="language-select form-select w-auto d-inline-block" id="lenguaje">
+                      <option value="python">Python</option>
+                      <option value="cpp">C++</option>
+                    </select>
+                  </div>
+                  <textarea name="codigo" class="code-editor" placeholder="Escribe tu código aquí..." id="codigo-inicial"></textarea>
+                </div>
+              </div>
 
-        <div class="input">
-          <div class="input-label">
-            <i class="icon-circle-empty"></i>
-            <label>Fecha de entrega</label>
-          </div>
-          <input name="fecha" type="datetime-local" class="date-input" id="fecha-entrega">
-        </div>
-
-        <div class="input">
-          <div class="input-label">
-            <i class="icon-circle-empty"></i>
-            <label>Código Inicial</label>
-          </div>
-          <div class="code-container">
-            <div class="code-header">
-              <select class="language-select" id="lenguaje">
-                <option value="python">Python</option>
-                <option value="cpp">C++</option>
-              </select>
-            </div>
-            <textarea name="codigo" class="code-editor" placeholder="Escribe tu código aquí..." id="codigo-inicial"></textarea>
+              <div class="input mb-3" id="lista-pruebas">
+                <div class="input-label d-flex align-items-center gap-2">
+                  <i class="icon-circle-empty"></i>
+                  <label>Pruebas</label>
+                  <div class="circle-plus" id="boton-crear-prueba" onmousedown="crearElementoPrueba()">
+                    <i class="icon-plus"></i>
+                  </div>
+                </div>
+                <div class="test-section pruebas"></div>
+                <div class="button-group mt-3">
+                  <button type="submit" class="button-secondary" id="boton-crear-ejercicio">Guardar</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-
-        <div class="input" id="lista-pruebas">
-          <div class="input-label">
-            <i class="icon-circle-empty"></i>
-            <label>Pruebas</label>
-            <div class="circle-plus" id="boton-crear-prueba" onmousedown="crearElementoPrueba()">
-              <i class="icon-plus"></i>
-            </div>
-          </div>
-
-          <div class="test-section pruebas">
-          </div>
-
-          <div class="button-group">
-            <a>
-              <button type="submit" class="button-secondary" id="boton-crear-ejercicio">Guardar</button>
-            </a>
-          </div>
-        </div>
-      </form>
-    </main>
+      </main>
+    </div>
   </div>
   <script src="{{ url_for('static', filename='js/features/ejercicios/ejercicio.crear.js') }}" type="module"></script>
 </body>

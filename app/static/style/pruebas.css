@@ -176,21 +176,6 @@ input-label {
   width: 100%;
 }
 
-.test-title {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.test-title span {
-  background-color: var(--accent);
-  padding: 4px 12px;
-  border-radius: 2px;
-  color: var(--card);
-  font-weight: 700;
-  font-size: 14px;
-}
-
 .test-header {
   width: 100%;
   gap: 5px;
