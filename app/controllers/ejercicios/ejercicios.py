@@ -1,11 +1,12 @@
-import json
 from flask import Blueprint, render_template, request, redirect, url_for, session
+import json
 
+from app.utils.generar_codigo import generar_codigo
 from app.models.ejercicios.ejercicios import (insertar_ejercicio, consultar_ejercicio, editar_ejercicio, eliminar_ejercicio, consultar_estadisticas_ejercicio, consultar_ejercicios_por_aula)
 from app.models.pruebas.pruebas import (insertar_prueba, consultar_pruebas, editar_prueba)
 from app.models.codigo.codigo import (consultar_codigo, darNota, insertar_codigo)
 from app.services.usuario import (obtener_sesion_id_usuario)
-from app.models.aulas.aulas import (es_profesor, consultar_aula)
+from app.models.aulas.aulas import (es_profesor, consultar_aula, actualizar_codigo_aula)
 
 ejercicios_bp = Blueprint('ejercicios_bp', __name__)
 
@@ -124,3 +125,11 @@ def guardar_notas(id_aula, id_ejercicio):
         print('An error has ocurried ', str(e))
 
   return redirect(url_for('ejercicios_bp.ejercicio', id_aula=id_aula, id_ejercicio=id_ejercicio))
+
+@ejercicios_bp.route('/aula/<id_aula>/actualizar-codigo', methods=['GET'])
+def actualizar_codigo(id_aula):
+  codigo = generar_codigo(6)
+  
+  actualizar_codigo_aula(id_aula, codigo)
+
+  return redirect(url_for('ejercicios_bp.ejercicios', id_aula=id_aula))

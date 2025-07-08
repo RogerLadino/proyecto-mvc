@@ -74,7 +74,7 @@
           <div class="codigo">
             <h3 style="display: flex;">
               Código
-              <a class="icon-pencil" href="#"></a>
+              <a class="icon-pencil" href="{{ url_for('ejercicios_bp.actualizar_codigo', id_aula=id_aula)}}"></a>
             </h3>
             <div>
               <p class="codigo-clase">{{ aula.codigo }}</p>

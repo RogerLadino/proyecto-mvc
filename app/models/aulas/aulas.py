@@ -38,3 +38,16 @@ def obtener_aulas_sidebar(id_usuario, id_rol):
     return cursor.fetchall()
 
   return []
+
+def actualizar_codigo_aula(id_aula, codigo):
+  connection = current_app.connection
+  
+  with connection.cursor() as cursor:
+    cursor.execute("""
+      UPDATE aula
+      SET codigo = %s
+      WHERE idAula = %s
+    """, (codigo, id_aula))
+    
+    connection.commit()
+  return True
