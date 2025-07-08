@@ -93,15 +93,6 @@ def editar(id_aula, id_ejercicio):
   
   return render_template('ejercicios/editar-ejercicio.html', ejercicio=ejercicio, pruebas=pruebas, id_aula=id_aula, id_ejercicio=id_ejercicio)
 
-@ejercicios_bp.route('/aulas/<id_aula>/ejercicios/<id_ejercicio>/eliminar')
-def eliminar(id_aula, id_ejercicio):
-  try:
-    eliminar_ejercicio(id_ejercicio)
-  except Exception as e:
-    print('An error has ocurried ', str(e))
-  
-  return redirect(url_for('aulas_bp.aula', id_aula=id_aula))
-
 @ejercicios_bp.route('/aulas/<id_aula>/ejercicios/<id_ejercicio>/guardar-notas', methods=['POST'])
 def guardar_notas(id_aula, id_ejercicio):
   usuarios = request.form.getlist('id_usuario')
@@ -126,7 +117,16 @@ def guardar_notas(id_aula, id_ejercicio):
 
   return redirect(url_for('ejercicios_bp.ejercicio', id_aula=id_aula, id_ejercicio=id_ejercicio))
 
-@ejercicios_bp.route('/aula/<id_aula>/actualizar-codigo', methods=['GET'])
+@ejercicios_bp.route('/aulas/<id_aula>/ejercicios/<id_ejercicio>/eliminar', methods=['GET', 'POST'])
+def eliminar(id_aula, id_ejercicio):
+  try:
+    eliminar_ejercicio(id_ejercicio)
+  except Exception as e:
+    print('An error has ocurried ', str(e))
+
+  return redirect(url_for('ejercicios_bp.ejercicios', id_aula=id_aula))
+
+@ejercicios_bp.route('/aulas/<id_aula>/actualizar-codigo', methods=['GET'])
 def actualizar_codigo(id_aula):
   codigo = generar_codigo(6)
   

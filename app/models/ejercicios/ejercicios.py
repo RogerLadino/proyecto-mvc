@@ -72,3 +72,5 @@ def eliminar_ejercicio(idEjercicio):
     """, (idEjercicio))
         
     connection.commit()
+
+  return True
