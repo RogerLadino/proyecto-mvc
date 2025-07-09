@@ -2,19 +2,20 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ejercicio</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style/general.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='icons/icons.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style/navigation.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style/tablas.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style/pruebas.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style/codigo.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style/agente-ai.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/general.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='icons/icons.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/navigation.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/tablas.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/pruebas.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/codigo.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/agente-ai.css') }}" />
 </head>
 
-<body>
+<body class="m-0 p-0 d-flex justify-content-start align-items-start flex-column vh-100">
   <nav class="top-navbar">
     <div class="nav-left">
       <a href="clases.html" class="logo-link">
@@ -32,108 +33,114 @@
     </div>
   </nav>
 
-  <div class="main-container">
-    <nav class="sidebar">
-      {% for user in usuarios %}
-        <a class="nav-item" data-id-codigo="{{ user.idCodigo }}" href="{{url_for('codigo_bp.codigo', id_aula=id_aula, id_ejercicio=id_ejercicio, id_usuario=user.idUsuario)}}">
-          <i class="icon-circle icon-accent"></i>
-          <span>{{ user.nombre1 }} {{ user.apellido1 }}</span>
-        </a>
-      {% endfor %}
-    </nav>
-    <main class="main-content">
-      <div class="main-editor-container">
-        <div class="student-info">
-          <div class="student-info-item">
-            <i class="icon-circle icon-warning"></i>
-            <p class="nombre-usuario">{{ codigo.nombre1 }} {{ codigo.apellido1 }}</p>
-          </div>
-        </div>
-        <div class="editor-container">
-          <div class="editor-section">
-            <div class="code">
-              <div class="editor-title code-title">
-                <div class="editor-title-item">
-                  <i class="icon-circle-empty icon-accent"></i>
-                  <p>Código</p>
-                </div>
-                <div class="editor-title-item">
-                  <select class="language-select">
-                    <option selected value="python">Python</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="html">HTML</option>
-                  </select>
-                  <i class="icon-play-circled icon-accent pointer" id="correr-codigo"></i>
+  <div class="m-0 p-0" style="flex: 1;">
+    <div class="row m-0 p-0 h-100" style="border-top: 1px solid var(--card)">
+      <!-- Sidebar -->
+      <aside class="col-2 sidebar p-0 m-0">
+        <nav class="side-nav h-100">
+          {% for user in usuarios %}
+            <a class="nav-item" data-id-codigo="{{ user.idCodigo }}" href="{{ url_for('codigo_bp.codigo', id_aula=id_aula, id_ejercicio=id_ejercicio, id_usuario=user.idUsuario) }}">
+              <i class="icon-circle icon-accent"></i>
+              <span>{{ user.nombre1 }} {{ user.apellido1 }}</span>
+            </a>
+          {% endfor %}
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="col-10 m-0 p-0">
+        <div class="row m-0 p-0 h-100">
+          <div class="col-12 p-0 m-0">
+            <div class="row p-0 m-0 h-100">
+              <div class="student-info col-12">
+                <div class="student-info-item">
+                  <i class="icon-circle icon-warning"></i>
+                  <p class="nombre-usuario">{{ codigo.nombre1 }} {{ codigo.apellido1 }}</p>
                 </div>
               </div>
-              <div class="editor-body code-textarea">
-                <div id="editor" class="code"></div>
-              </div>
-            </div>
-          </div>
-          <div class="editor-section tabs">
-            <div class="editor-title exercise-title tab-container">
-              <div class="editor-title-item tab">
-                <i class="icon-circle-empty icon-accent"></i>
-                <p>Ejercicio</p>
-              </div>
-              <div class="editor-title-item tab">
-                <i class="icon-circle-empty icon-accent"></i>
-                <p>Consola</p>
-              </div>
-              <div class="editor-title-item tab">
-                <i class="icon-circle-empty icon-accent"></i>
-                <p>Ayuda</p>
-              </div>
-            </div>
-            <div class="tab-content">
-              <div class="exercise tab-item">
-                <div class="editor-body exercise-description">
-                  <h2 class="titulo-ejercicio">{{ ejercicio.nombre }}</h2>
-                  <p class="descripcion-ejercicio">{{ ejercicio.descripcion }}</p>
-                  <div class="pruebas"></div>
-                </div>
-              </div>
-              <div class="console tab-item">
-                <div class="editor-body console-info">
-                  <p>
-                    Salida del programa:
-                    <br>
-                    Hello Roger, how are you?
-                    <br><br>
-                    Prueba #1 . . . . . . <i class="icon-success">CORRECTA</i>
-                  </p>
-                </div>
-                <div class="editor-title console-title">
-                  <div class="editor-title-item">
-                    <p>Resuelto: </p>
-                    <i class="icon-cancel checkmark console-icon"></i>
-                    <p>A tiempo: </p>
-                    <i class="icon-clock clock console-icon"></i>
+              <div class="editor-container row col-12 p-0 m-0">
+                <div class="editor-section col-md-6 p-0 m-0">
+                  <div class="code">
+                    <div class="editor-title code-title">
+                      <div class="editor-title-item">
+                        <i class="icon-circle-empty icon-accent"></i>
+                        <p>Código</p>
+                      </div>
+                      <div class="editor-title-item">
+                        <select class="language-select">
+                          <option selected value="python">Python</option>
+                          <option value="javascript">JavaScript</option>
+                          <option value="html">HTML</option>
+                        </select>
+                        <i class="icon-play-circled icon-accent pointer" id="correr-codigo"></i>
+                      </div>
+                    </div>
+                    <div class="editor-body code-textarea">
+                      <div id="editor" class="code"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="analysis tab-item">
-                <div class="messages"></div>
-                <form class="chat">
-                  <input class="chat-input" type="text" placeholder="Escribe un texto aquí">
-                  <button class="chat-submit">
-                    <i class="icon-direction"></i>
-                  </button>
-                </form>
-              </div>
+                <div class="editor-section col-md-6 tabs">
+                  <div class="editor-title exercise-title tab-container d-flex">
+                    <div class="editor-title-item tab">
+                      <i class="icon-circle-empty icon-accent"></i>
+                      <p>Ejercicio</p>
+                    </div>
+                    <div class="editor-title-item tab">
+                      <i class="icon-circle-empty icon-accent"></i>
+                      <p>Consola</p>
+                    </div>
+                    <div class="editor-title-item tab">
+                      <i class="icon-circle-empty icon-accent"></i>
+                      <p>Ayuda</p>
+                    </div>
+                  </div>
+                  <div class="tab-content">
+                    <div class="exercise tab-item">
+                      <div class="editor-body exercise-description">
+                        <h2 class="titulo-ejercicio fw-bold py-2" style="font-size: 24px;">{{ ejercicio.nombre }}</h2>
+                        <p class="descripcion-ejercicio" style="font-size: 16px;">{{ ejercicio.descripcion }}</p>
+                        <div class="pruebas"></div>
+                      </div>
+                    </div>
+                    <div class="console tab-item">
+                      <div class="editor-body console-info">
+                        <p>
+                          Salida del programa:
+                          <br />
+                          Hello Roger, how are you?
+                          <br /><br />
+                          Prueba #1 . . . . . . <i class="icon-success">CORRECTA</i>
+                        </p>
+                      </div>
+                      <div class="editor-title console-title">
+                        <div class="editor-title-item">
+                          <p>Resuelto:</p>
+                          <i class="icon-cancel checkmark console-icon"></i>
+                          <p>A tiempo:</p>
+                          <i class="icon-clock clock console-icon"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="analysis tab-item">
+                      <div class="messages"></div>
+                      <form class="chat">
+                        <input class="chat-input" type="text" placeholder="Escribe un texto aquí" />
+                        <button class="chat-submit"><i class="icon-direction"></i></button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- editor-container -->
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
-  <script src="{{ url_for('static', filename='js/lib/ace/src-min-noconflict/ace.js') }}" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="{{ url_for('static', filename='js/lib/ace/src-min-noconflict/ext-language_tools.js') }}" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="{{ url_for('static', filename='js/lib/socketio/socket.io.min.js') }}"
-    type="text/javascript" charset="utf-8"></script>
+  <script src="{{ url_for('static', filename='js/lib/ace/src-min-noconflict/ace.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='js/lib/ace/src-min-noconflict/ext-language_tools.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='js/lib/socketio/socket.io.min.js') }}" type="text/javascript" charset="utf-8"></script>
   <script type="module" src="{{ url_for('static', filename='js/features/codigo/codigo.editor.js')}}"></script>
   <script type="module" src="{{ url_for('static', filename='js/features/codigo/codigo.js')}}"></script>
   <script type="module" src="{{ url_for('static', filename='js/features/codigo/codigo.analisis.js')}}"></script>

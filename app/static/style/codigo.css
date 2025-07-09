@@ -29,7 +29,6 @@
 }
 
 .sidebar {
-  width: 200px;
   background-color: var(--primary);
   border-right: 1px solid var(--card);
   border-top: 1px solid var(--card);
@@ -104,6 +103,8 @@
 }
 
 .editor-title-item p {
+  margin: 0;
+  padding: 0;
   font-weight: 600;
 }
 
@@ -161,6 +162,7 @@
   width: 100%;
   padding: 5px;
   border-bottom: 1px solid var(--card);
+  height: 50px;
 }
 
 .student-info-item {
@@ -170,6 +172,14 @@
   justify-content: center;
   gap: 5px;
   padding: 5px 0;
+}
+
+.student-info-item p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
 }
 
 .note-input {
