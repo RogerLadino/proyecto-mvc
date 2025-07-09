@@ -71,7 +71,30 @@
       <main class="main-content p-4 w-100">
         <h2>Clases en las que estás inscrito</h2>
 
-        {% if aulas %}
+        <!-- Formulario para unirse a una clase -->
+        <form
+          method="POST"
+          action="{{ url_for('aulas_alumno_bp.unirse') }}"
+          class="mt-4 mb-4"
+        >
+          <div class="input-group" style="max-width: 400px">
+            <input
+              type="text"
+              name="codigo"
+              class="form-control"
+              placeholder="Código del aula"
+              required
+            />
+            <button class="btn btn-primary" type="submit">Unirse</button>
+          </div>
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div class="alert alert-{{ category }} mt-2" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %} {% endif %} {% endwith %} {% if aulas %}
         <div class="d-flex gap-3 flex-wrap mt-4">
           {% for aula in aulas %}
           <div
@@ -94,7 +117,7 @@
           {% endfor %}
         </div>
         {% else %}
-        <p>No estás inscrito en ninguna clase.</p>
+        <p class="mt-4">No estás inscrito en ninguna clase.</p>
         {% endif %}
       </main>
     </div>
