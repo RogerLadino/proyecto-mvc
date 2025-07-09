@@ -1,5 +1,5 @@
 # app/__init__.py
-from flask import Flask
+from flask import Flask, app
 from flask_socketio import SocketIO
 import pymysql.cursors
 from flask import Flask
@@ -25,13 +25,20 @@ def create_app(config_class=Config):
     app.connection = connection
     app.socketio = socketio
 
+    
+
     from app.controllers.ejercicios.ejercicios import ejercicios_bp
     from app.controllers.codigo.codigo import codigo_bp
-    
+    from app.controllers.aulas.aulas import aulas_bp
+    from app.controllers.aulas.aulas_alumno import aulas_alumno_bp
+
+    app.register_blueprint(aulas_alumno_bp)
+    app.register_blueprint(aulas_bp)
     app.register_blueprint(ejercicios_bp)
     app.register_blueprint(codigo_bp)
 
     Bcrypt(app)
+
 
     # Registrar Blueprints
     with app.app_context():
@@ -42,10 +49,4 @@ def create_app(config_class=Config):
         # Aquí registramos nuestro controlador
         from .controllers.usuarios_controller import usuario_bp
         app.register_blueprint(usuario_bp)
-
-    # Registrar Blueprints
-        with app.app_context():
-            from .controllers.main import main_bp
-            app.register_blueprint(main_bp)
-        
     return app
