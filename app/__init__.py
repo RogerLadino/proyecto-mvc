@@ -35,10 +35,12 @@ def create_app(config_class=Config):
     from app.controllers.usuarios_controller import usuario_bp
     from app.controllers.ejercicios.ejercicios import ejercicios_bp
     from app.controllers.codigo.codigo import codigo_bp
-    
+    from app.controllers.reportes.reportes_controller import reportes_bp 
+  
     app.register_blueprint(main_bp)
     app.register_blueprint(usuario_bp)
     app.register_blueprint(ejercicios_bp)
     app.register_blueprint(codigo_bp)
+    app.register_blueprint(reportes_bp) 
     
     return app
