@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mis Clases</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}"
+    />
+
+    <!-- Estilos -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/general.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/icons.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/navigation.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/clases.css') }}"
+    />
+  </head>
+  <body class="bg-dark text-light">
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg"
+      style="background-color: var(--primary)"
+    >
+      <div class="container-fluid">
+        <a
+          class="navbar-brand d-flex align-items-center gap-2 text-light"
+          href="#"
+        >
+          <div class="app-logo"></div>
+          <span class="app-name">Estudiante</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="d-flex">
+      <!-- Sidebar -->
+      <aside
+        class="d-flex flex-column p-3"
+        style="
+          width: 220px;
+          background-color: var(--primary);
+          min-height: 100vh;
+        "
+      >
+        <ul class="nav nav-pills flex-column mb-4">
+          <li class="nav-item">
+            <a href="#" class="nav-link text-light">
+              <i class="icon-home me-2"></i> Inicio
+            </a>
+          </li>
+        </ul>
+        <hr class="divisor" />
+        <h6 class="text-white">Clases inscritas</h6>
+      </aside>
+
+      <!-- Main -->
+      <main class="main-content p-4 w-100">
+        <h2>Clases en las que estás inscrito</h2>
+
+        {% if aulas %}
+        <div class="d-flex gap-3 flex-wrap mt-4">
+          {% for aula in aulas %}
+          <div
+            class="card text-light"
+            style="width: 160px; background-color: var(--card)"
+          >
+            <div
+              class="card-header text-center"
+              style="
+                background-color: var(--accent);
+                border: 3px solid var(--primary);
+              "
+            >
+              <strong>{{ aula.nombre }}</strong>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Código: {{ aula.codigo }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p>No estás inscrito en ninguna clase.</p>
+        {% endif %}
+      </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
+  </body>
+</html>

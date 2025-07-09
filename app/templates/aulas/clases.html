@@ -1,0 +1,158 @@
+<!-- templates/aulas.html -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clases</title>
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}"
+    />
+
+    <!-- Estilos personalizados -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/general.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/icons.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/navigation.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/clases.css') }}"
+    />
+  </head>
+  <body class="bg-dark text-light">
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg"
+      style="background-color: var(--primary)"
+    >
+      <div class="container-fluid">
+        <a
+          class="navbar-brand d-flex align-items-center gap-2"
+          href="{{ url_for('aulas_bp.aulas') }}"
+        >
+          <div class="app-logo"></div>
+          <span class="app-name">Nombre</span>
+        </a>
+        <div class="dropdown">
+          <button
+            class="btn btn-dark rounded-circle"
+            type="button"
+            data-bs-toggle="dropdown"
+          >
+            <i class="icon-user"></i>
+          </button>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            style="background-color: var(--card)"
+          >
+            <li>
+              <a class="dropdown-item text-light" href="#">Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="d-flex">
+      <!-- Sidebar -->
+      <aside
+        class="d-flex flex-column p-3"
+        style="
+          width: 220px;
+          background-color: var(--primary);
+          min-height: 100vh;
+        "
+      >
+        <ul class="nav nav-pills flex-column mb-4">
+          <li class="nav-item mb-2">
+            <a
+              href="{{ url_for('aulas_bp.aulas') }}"
+              class="nav-link text-light"
+            >
+              <i class="icon-home me-2"></i> Inicio
+            </a>
+          </li>
+        </ul>
+        <hr class="divisor" />
+        <h6 class="text-white">Aulas dictadas</h6>
+        <!-- Aquí puedes listar accesos rápidos a clases -->
+      </aside>
+
+      <!-- Main -->
+      <main class="main-content p-4 w-100">
+        <div class="d-flex justify-content-end mb-4 gap-2">
+          <a
+            class="btn text-light"
+            href="{{ url_for('aulas_bp.crear') }}"
+            style="background-color: var(--card)"
+          >
+            <i class="icon-plus-circled"></i> Crear Clase
+          </a>
+        </div>
+
+        <!-- Clases que dictas -->
+        <div class="clases-contenedor">
+          <h2>Clases que dictas</h2>
+
+          {% if aulas %}
+          <div class="d-flex gap-3 flex-wrap">
+            {% for aula in aulas %}
+            <div
+              class="card text-light"
+              style="width: 160px; background-color: var(--card)"
+            >
+              <div
+                class="card-header text-center"
+                style="
+                  background-color: var(--accent);
+                  border: 3px solid var(--primary);
+                "
+              >
+                <strong>{{ aula.nombre }}</strong>
+              </div>
+              <div class="card-body">
+                <p class="card-text">Código: {{ aula.codigo }}</p>
+                <div class="d-flex gap-1">
+                  <a
+                    href="{{ url_for('aulas_bp.modificar', id_aula=aula.idAula) }}"
+                    class="btn btn-sm btn-warning"
+                    >Editar</a
+                  >
+                  <form
+                    method="POST"
+                    action="{{ url_for('aulas_bp.eliminar', id_aula=aula.idAula) }}"
+                  >
+                    <button
+                      class="btn btn-sm btn-danger"
+                      onclick="return confirm('¿Seguro de eliminar?')"
+                    >
+                      Eliminar
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <p>No tienes clases aún. Crea una para comenzar.</p>
+          {% endif %}
+        </div>
+      </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
+  </body>
+</html>
