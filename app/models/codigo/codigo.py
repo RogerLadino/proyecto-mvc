@@ -5,9 +5,13 @@ def consultar_codigo(id_usuario, id_ejercicio):
     
   with connection.cursor() as cursor:
     cursor.execute("""
-      SELECT * FROM codigo WHERE idUsuario = %s AND idEjercicio = %s
+      SELECT c.*, u.nombre1, u.apellido1
+      FROM codigo c
+      INNER JOIN usuario u ON c.idUsuario = u.idUsuario
+      WHERE c.idUsuario = %s AND c.idEjercicio = %s
     """, (id_usuario, id_ejercicio))
         
+
     return cursor.fetchone()
 
 def consultar_usuario_con_codigo(id_codigo):
@@ -38,7 +42,7 @@ def consultar_usuarios_con_codigo(id_ejercicio):
     
   with connection.cursor() as cursor:
     cursor.execute("""
-      SELECT u.idUsuario, u.nombre1, u.apellido1, c.idCodigo
+      SELECT u.idUsuario, u.nombre1, u.apellido1
       FROM codigo c
       INNER JOIN usuario u ON c.idUsuario = u.idUsuario 
       WHERE idEjercicio = %s
@@ -46,28 +50,28 @@ def consultar_usuarios_con_codigo(id_ejercicio):
         
     return cursor.fetchall() 
 
-def insertar_codigo(idUsuario, idEjercicio, notaObtenida):
+def insertar_codigo(idUsuario, idEjercicio):
   connection = current_app.connection
     
   with connection.cursor() as cursor:
     cursor.execute("""
-      INSERT INTO codigo (idUsuario, idEjercicio, codigo, notaObtenida, resuelto, intentosRealizados, fechaEntrega, idTipoLenguaje)
-      VALUES (%s, %s, '', %s, 0, 0, '0000-00-00 00:00:00', 'python')
-    """, (idUsuario, idEjercicio, notaObtenida))
+      INSERT INTO codigo (idUsuario, idEjercicio, codigo, intentosRealizados, idTipoLenguaje)
+      VALUES (%s, %s, '', 0, 1)
+    """, (idUsuario, idEjercicio))
         
     connection.commit()
     
     return cursor.lastrowid 
 
-def actualizar_codigo(idCodigo, nuevoCodigo):
+def actualizar_codigo(idUsuario, idEjercicio, nuevoCodigo):
   connection = current_app.connection
     
   with connection.cursor() as cursor:
     cursor.execute("""
       UPDATE codigo 
       SET codigo = %s
-      WHERE idCodigo = %s
-    """, (nuevoCodigo, idCodigo))
+      WHERE idUsuario = %s AND idEjercicio = %s
+    """, (nuevoCodigo, idUsuario, idEjercicio))
         
     connection.commit()
     

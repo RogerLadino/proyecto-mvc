@@ -24,6 +24,17 @@ def es_profesor(id_usuario, id_aula):
     return True
   return False
 
+def obtener_profesor(id_aula):
+  connection = current_app.connection
+  
+  with connection.cursor() as cursor:
+    cursor.execute("""
+      SELECT idUsuario FROM usuario_aula WHERE idAula = %s AND idRol = 1
+    """, (id_aula))
+    
+    return cursor.fetchone()
+    
+
 def obtener_aulas_sidebar(id_usuario, id_rol):
   connection = current_app.connection
   

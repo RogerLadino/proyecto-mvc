@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ejercicio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style/general.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='icons/icons.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style/navigation.css') }}">
@@ -35,7 +36,7 @@
   <div class="main-container">
     <nav class="sidebar">
       {% for user in usuarios %}
-        <a class="nav-item" data-id-codigo="{{ user.idCodigo }}" href="{{url_for('codigo_bp.codigo', id_aula=id_aula, id_ejercicio=id_ejercicio, id_codigo=user.idCodigo)}}">
+        <a class="nav-item" data-id-codigo="{{ user.idCodigo }}" href="{{url_for('codigo_bp.codigo', id_aula=id_aula, id_ejercicio=id_ejercicio, id_usuario=user.idUsuario)}}">
           <i class="icon-circle icon-accent"></i>
           <span>{{ user.nombre1 }} {{ user.apellido1 }}</span>
         </a>
@@ -46,7 +47,7 @@
         <div class="student-info">
           <div class="student-info-item">
             <i class="icon-circle icon-warning"></i>
-            <p class="nombre-usuario"></p>
+            <p class="nombre-usuario">{{ codigo.nombre1 }} {{ codigo.apellido1 }}</p>
           </div>
           <div class="student-info-item">
             <i class="icon-circle-empty student-icon"></i>
@@ -151,6 +152,7 @@
   <script type="module" src="{{ url_for('static', filename='js/features/codigo/codigo.editor.js')}}"></script>
   <script type="module" src="{{ url_for('static', filename='js/features/codigo/codigo.js')}}"></script>
   <script type="module" src="{{ url_for('static', filename='js/features/codigo/codigo.analisis.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/utils/dropdown.js') }}" type="module"></script>
   <script type="module">
     import { cargarPruebas } from "{{ url_for('static', filename='js/features/pruebas/pruebas.handler.js') }}";
     import { configurarEjecutarCodigo } from "{{ url_for('static', filename='js/features/codigo/codigo.handler.js') }}";
@@ -159,8 +161,8 @@
 
     editor.setValue(`{{ codigo.codigo }}`, -1);
     cargarPruebas({{ pruebas|tojson|safe }});
-    configurarEjecutarCodigo("{{ url_for('codigo_bp.ejecutar_codigo', id_aula=id_aula, id_ejercicio=id_ejercicio, id_codigo=id_codigo) }}");
-    iniciarCodigoSocket({{ id_codigo }})
+    configurarEjecutarCodigo("{{ url_for('codigo_bp.ejecutar_codigo', id_aula=id_aula, id_ejercicio=id_ejercicio, id_usuario=id_usuario) }}");
+    iniciarCodigoSocket({{ codigo.idUsuario }}, {{ id_ejercicio }})
   </script>
 </body>
 
