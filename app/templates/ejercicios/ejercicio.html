@@ -89,8 +89,8 @@
                     <span>Nota</span>
                   </td>
                   <td class="score">
-                    {% if codigo.notaObtenida %}
-                    {{ codigo.notaObtenida }}/100
+                    {% if entrega.notaObtenida %}
+                    {{ entrega.notaObtenida }}/100
                     {% else %}
                     0/100
                     {% endif %}
@@ -103,7 +103,7 @@
                   </td>
                   <td>
                     <div class="checkmark">
-                      {% if codigo.resuelto %}
+                      {% if entrega.resuelto %}
                       <i class="icon-check"></i>
                       {% else %}
                       <i class="icon-cancel"></i>

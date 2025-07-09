@@ -99,22 +99,6 @@
                 <input type="datetime-local" class="date-input" id="fecha-entrega" name="fecha" value="{{ ejercicio.fechaEntrega }}">
               </div>
 
-              <div class="input mb-3">
-                <div class="input-label">
-                  <i class="icon-circle-empty"></i>
-                  <label>Código Inicial</label>
-                </div>
-                <div class="code-container">
-                  <div class="code-header mb-2">
-                    <select class="language-select form-select w-auto d-inline-block">
-                      <option value="python">Python</option>
-                      <option value="cpp">C++</option>
-                    </select>
-                  </div>
-                  <textarea class="code-editor" placeholder="Escribe tu código aquí..." name="codigo" id="codigo-inicial">{{ ejercicio.codigoInicial }}</textarea>
-                </div>
-              </div>
-
               <div class="input mb-3" id="lista-pruebas">
                 <div class="input-label d-flex align-items-center gap-2">
                   <i class="icon-circle-empty"></i>

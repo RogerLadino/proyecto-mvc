@@ -72,15 +72,3 @@ def actualizar_codigo(idCodigo, nuevoCodigo):
     connection.commit()
     
     return cursor.lastrowid 
-
-def darNota(idUsuario, idEjercicio, nota):
-  connection = current_app.connection
-    
-  with connection.cursor() as cursor:
-    cursor.execute("""
-      UPDATE codigo
-      SET notaObtenida = %s
-      WHERE idUsuario = %s AND idEjercicio = %s
-    """, (nota, idUsuario, idEjercicio))
-        
-    connection.commit()
