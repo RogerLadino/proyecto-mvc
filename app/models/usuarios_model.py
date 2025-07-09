@@ -6,17 +6,21 @@ def get_usuario_by_correo(connection, correo):
         cursor.execute("SELECT idUsuario FROM usuario WHERE correo = %s", (correo,))
         return cursor.fetchone()
 
-def insert_usuario(connection, nombre1, nombre2, apellido1, apellido2, correo, hashed_password):
-    """Inserta un nuevo usuario en la tabla 'usuario'."""
+def insert_usuario(connection, nombre1, nombre2, apellido1, apellido2, correo, hashed_password, idRol):
+    """Inserta un nuevo usuario en la tabla 'usuario', incluyendo su rol."""
     with connection.cursor() as cursor:
-        sql = """INSERT INTO usuario (nombre1, nombre2, apellido1, apellido2, correo, contraseña)
-                 VALUES (%s, %s, %s, %s, %s, %s)"""
-        cursor.execute(sql, (nombre1, nombre2, apellido1, apellido2, correo, hashed_password))
+        # Se añade la columna 'idRol' a la consulta
+        sql = """INSERT INTO usuario (nombre1, nombre2, apellido1, apellido2, correo, contraseña, idRol)
+                 VALUES (%s, %s, %s, %s, %s, %s, %s)""" # Se añade un placeholder '%s'
+        
+        # Se pasa el nuevo valor 'idRol' en la tupla de ejecución
+        cursor.execute(sql, (nombre1, nombre2, apellido1, apellido2, correo, hashed_password, idRol))
     connection.commit()
 
 def get_usuario_for_login(connection, correo):
-    """Obtiene el id y la contraseña hasheada de un usuario para el login."""
+    """Obtiene el id, la contraseña y el ROL de un usuario para el login."""
     with connection.cursor() as cursor:
-        # Seleccionamos el id y la contraseña para la verificación
-        cursor.execute("SELECT idUsuario, contraseña FROM usuario WHERE correo = %s", (correo,))
+        # Ahora también seleccionamos el 'idRol'
+        sql = "SELECT idUsuario, contraseña, idRol FROM usuario WHERE correo = %s"
+        cursor.execute(sql, (correo,))
         return cursor.fetchone()
