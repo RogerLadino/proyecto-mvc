@@ -6,7 +6,6 @@
 # DELETE /aulas/eliminar/<id> -- Eliminar aula según id
 # PUT /aulas/modificar/<id>  -- Modificar aula según id
 from flask import Blueprint,render_template, request, redirect, url_for, session, flash
-import mysql.connector
 from config import Config
 from app.models.aulas.aulas import es_profesor
 from app.services.usuario import obtener_sesion_id_usuario

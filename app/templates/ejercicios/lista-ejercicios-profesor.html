@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/general.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='icons/icons.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/navigation.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/lista-ejercicios.css') }}" />
+  </head>
+
+  <body>
+    <nav class="top-navbar">
+      <div class="nav-left">
+        <a href="clases.html" class="logo-link">
+          <div class="app-logo"></div>
+          <h1 class="app-name">Nombre</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <div class="user-circle">
+          <i class="icon-user"></i>
+          <div class="dropdown-menu">
+            <a href="index.html" class="dropdown-item">Cerrar sesión</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="row m-0 p-0">
+      <aside class="col-2 sidebar p-0">
+        <nav class="side-nav h-100">
+          <ul class="list-unstyled">
+            <i class="divisor"></i>
+            <li class="nav-item home">
+              <a href="clases.html">
+                <i class="icon-home"></i>
+                <span>Inicio</span>
+              </a>
+            </li>
+            <i class="divisor"></i>
+            <li class="nav-item class1">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <a href="lista-ejercicios-profesor.html">Clase 1</a>
+            </li>
+            <li class="nav-item class2">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <a href="lista-ejercicios.html">Clase 2</a>
+            </li>
+            <li class="nav-item class3">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <span>Clase 3</span>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="col-10 m-0">
+        <div class="row">
+          <div class="col-12">
+            <div class="titulo-clase mb-3">
+              <div class="titulo">
+                <div class="cuadrado"></div>
+                <h1 class="nombre-clase m-0 p-0">{{ aula.nombre }}</h1>
+                <strong class="nombre-profesor"></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="container-fluid m-0 p-0 py-2 row">
+              <div class="col-12 col-md-2 mr-2 px-2 py-1">
+                <div class="w-100 h-100 codigo p-2 align-items-center flex-row justify-content-center justify-content-md-start flex-md-column test-title">
+                  <span style="display: flex; font-size: 18px;" class="fw-bold px-2">
+                    Código
+                    <a style="color: var(--card);" class="icon-pencil" href="{{ url_for('ejercicios_bp.actualizar_codigo', id_aula=id_aula) }}"></a>
+                  </span>
+                  <div>
+                    <p class="codigo-clase fw-bold m-0 p-0">{{ aula.codigo }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-10 m-0 px-2 py-1">
+                <div class="botones mb-2">
+                  <a class="clase-boton" href="{{ url_for('ejercicios_bp.crear', id_aula=id_aula) }}">
+                    <i class="icon-plus"></i>
+                    <span>Nuevo Ejercicio</span>
+                  </a>
+                  <a class="clase-boton" href="reportes.html">
+                    <i class="icon-chart-bar"></i>
+                    <span>Calificaciones</span>
+                  </a>
+                  <a class="clase-boton boton-editar-clase" href="#">
+                    <i class="icon-pencil"></i>
+                    <span>Editar Clase</span>
+                  </a>
+                </div>
+                <div id="lista-ejercicios-profesor" class="lista-ejercicios">
+                  {% for ejercicio in ejercicios %}
+                    <div class="ejercicio col-12">
+                      <i class="circulo icon-circle-empty icono-accent"></i>
+                      <p class="m-0 p-0">{{ ejercicio.nombre }}</p>
+                      <p class="fecha my-0 p-0">{{ ejercicio.fechaEntrega }}</p>
+                      <a class="icon-right" href="{{ url_for('ejercicios_bp.ejercicio', id_aula=id_aula, id_ejercicio=ejercicio.idEjercicio) }}"></a>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

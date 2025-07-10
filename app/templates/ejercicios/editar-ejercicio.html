@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ejercicio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style/general.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='icons/icons.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style/navigation.css') }}">
@@ -30,122 +31,102 @@
     </div>
   </nav>
 
-  <div class="main-container">
-    <aside class="sidebar">
-      <nav class="side-nav">
-        <ul>
-          <i class="divisor"></i>
-          <li class="nav-item home">
-            <a href="clases.html">
-              <i class="icon-home"></i>
-              <span>Inicio</span>
-            </a>
-          </li>
-          <i class="divisor"></i>
-          <li class="nav-item class1">
-            <div class="class-icon">
-              <i class="empty-square"></i>
+  <div class="container-fluid m-0 p-0">
+    <div class="row m-0 p-0">
+      <aside class="col-2 sidebar">
+        <nav class="side-nav h-100">
+          <ul class="list-unstyled">
+            <i class="divisor"></i>
+            <li class="nav-item home">
+              <a href="clases.html">
+                <i class="icon-home"></i>
+                <span>Inicio</span>
+              </a>
+            </li>
+            <i class="divisor"></i>
+            <li class="nav-item class1">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <a href="lista-ejercicios-profesor.html">Clase 1</a>
+            </li>
+            <li class="nav-item class2">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <a href="lista-ejercicios.html">Clase 2</a>
+            </li>
+            <li class="nav-item class3">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <span>Clase 3</span>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="col-10">
+        <div class="row">
+          <div class="col-12">
+            <div class="exercise-header d-flex align-items-center gap-2 mb-4">
+              <i class="icon-circle-empty"></i>
+              <h2 class="mb-0">Editar Ejercicio</h2>
             </div>
-            <a href="lista-ejercicios-profesor.html">Clase 1</a>
-          </li>
-          <li class="nav-item class2">
-            <div class="class-icon">
-              <i class="empty-square"></i>
-            </div>
-            <a href="lista-ejercicios.html">Clase 2</a>
-          </li>
-          <li class="nav-item class3">
-            <div class="class-icon">
-              <i class="empty-square"></i>
-            </div>
-            <span>Clase 3</span>
-          </li>
-        </ul>
-      </nav>
-    </aside>
+            <form id="form" method="post" action="{{url_for('ejercicios_bp.editar', id_aula=id_aula, id_ejercicio=id_ejercicio)}}" class="edit-form">
+              <div class="input mb-3">
+                <div class="input-label">
+                  <i class="icon-circle-empty"></i>
+                  <label>Nombre del ejercicio</label>
+                </div>
+                <input type="text" class="input-field" placeholder="Nombre del ejercicio" name="nombre" id="nombre"
+                  value="{{ ejercicio.nombre }}">
+              </div>
 
-    <form id="form" method="post" action="{{url_for('ejercicios_bp.editar', id_aula=id_aula, id_ejercicio=id_ejercicio)}}" class="main-content">
-      <div class="exercise-header">
-        <i class="icon-circle-empty"></i>
-        <h2>Editar Ejercicio</h2>
-      </div>
+              <div class="input mb-3">
+                <div class="input-label">
+                  <i class="icon-circle-empty"></i>
+                  <label>Descripción</label>
+                </div>
+                <textarea class="textbox-field" placeholder="Descripción del ejercicio" name="descripcion" id="descripcion">{{ ejercicio.descripcion }}</textarea>
+              </div>
 
-      <div class="edit-form">
-        <div class="input">
-          <div class="input-label">
-            <i class="icon-circle-empty"></i>
-            <label>Nombre del ejercicio</label>
-          </div>
-          <input type="text" class="input-field" placeholder="Nombre del ejercicio" name="nombre" id="nombre"
-            value="{{ ejercicio.nombre }}">
-        </div>
+              <div class="input mb-3">
+                <div class="input-label">
+                  <i class="icon-circle-empty"></i>
+                  <label>Fecha de entrega</label>
+                </div>
+                <input type="datetime-local" class="date-input" id="fecha-entrega" name="fecha" value="{{ ejercicio.fechaEntrega }}">
+              </div>
 
-        <div class="input">
-          <div class="input-label">
-            <i class="icon-circle-empty"></i>
-            <label>Descripción</label>
-          </div>
-          <textarea class="textbox-field" placeholder="Descripción del ejercicio" name="descripcion" id="descripcion">
-{{ ejercicio.descripcion }}
-          </textarea>
-        </div>
-
-        <div class="input">
-          <div class="input-label">
-            <i class="icon-circle-empty"></i>
-            <label>Fecha</label>
-          </div>
-          <input type="datetime-local" class="date-input" value="" id="fecha-entrega" name="fecha" value="{{ ejercicio.fechaEntrega }}">
-        </div>
-
-        <div class="input">
-          <div class="input-label">
-            <i class="icon-circle-empty"></i>
-            <label>Código Inicial</label>
-          </div>
-          <div class="code-container">
-            <div class="code-header">
-              <select class="language-select">
-                <option value="python">Python</option>
-              </select>
-            </div>
-            <textarea class="code-editor" placeholder="Escribe tu código aquí..." name="codigo" id="codigo-inicial">
-{{ ejercicio.codigoInicial }}
-            </textarea>
+              <div class="input mb-3" id="lista-pruebas">
+                <div class="input-label d-flex align-items-center gap-2">
+                  <i class="icon-circle-empty"></i>
+                  <label>Pruebas</label>
+                  <div class="circle-plus ms-2" id="boton-crear-prueba" onmousedown="crearElementoPrueba()">
+                    <i class="icon-plus"></i>
+                  </div>
+                </div>
+                <div class="test-section pruebas"></div>
+                <div class="button-group mt-3">
+                  <button type="submit" class="button-secondary boton-guardar">Guardar</button>
+                  <a href="{{ url_for('ejercicios_bp.eliminar', id_aula=id_aula, id_ejercicio=id_ejercicio) }}">
+                    <button type="button" class="button boton-borrar">Borrar</button>
+                  </a>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-
-        <div class="input">
-          <div class="input-label">
-            <i class="icon-circle-empty"></i>
-            <label>Pruebas</label>
-            <div class="circle-plus">
-              <i class="icon-plus" id="boton-crear-prueba" onmousedown="crearElementoPrueba()"></i>
-            </div>
-          </div>
-
-          <div class="test-section pruebas">
-          </div>
-        </div>
-
-        <div class="button-group">
-          <a>
-            <button type="submit" class="button-secondary boton-guardar">Guardar</button>
-          </a>
-          <a href="{{ url_for('ejercicios_bp.eliminar', id_aula=id_aula, id_ejercicio=id_ejercicio) }}">
-            <button type="button" class="button boton-borrar">Borrar</button>
-          </a>
-        </div>
-      </div>
-    </main>
-    <script src="{{ url_for('static', filename='js/features/ejercicios/ejercicios.editar.js') }}" type="module"></script>
-    <script src="{{ url_for('static', filename='js/utils/dropdown.js') }}" type="module"></script>
-    <script type="module">
-      import { cargarPruebas } from "{{ url_for('static', filename='js/features/pruebas/pruebas.handler.js') }}";
-
-      cargarPruebas({{ pruebas | tojson | safe}});
-    </script>
+      </main>
+    </div>
   </div>
+  <script src="{{ url_for('static', filename='js/features/ejercicios/ejercicios.editar.js') }}" type="module"></script>
+  <script src="{{ url_for('static', filename='js/utils/dropdown.js') }}" type="module"></script>
+  <script type="module">
+    import { cargarPruebas } from "{{ url_for('static', filename='js/features/pruebas/pruebas.handler.js') }}";
+    cargarPruebas({{ pruebas | tojson | safe}});
+  </script>
 </body>
 
 </html>

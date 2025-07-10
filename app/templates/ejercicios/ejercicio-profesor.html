@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ejercicio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style/general.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='icons/icons.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style/navigation.css') }}">
@@ -30,110 +31,112 @@
     </div>
   </nav>
 
-  <div class="main-container">
-    <aside class="sidebar">
-      <nav class="side-nav">
-        <ul>
-          <i class="divisor"></i>
-          <li class="nav-item home">
-            <a href="clases.html">
-              <i class="icon-home"></i>
-              <span>Inicio</span>
-            </a>
-          </li>
-          <i class="divisor"></i>
-          <li class="nav-item class1">
-            <div class="class-icon">
-              <i class="empty-square"></i>
-            </div>
-            <a href="lista-ejercicios-profesor.html">Clase 1</a>
-          </li>
-          <li class="nav-item class2">
-            <div class="class-icon">
-              <i class="empty-square"></i>
-            </div>
-            <a href="lista-ejercicios.html">Clase 2</a>
-          </li>
-          <li class="nav-item class3">
-            <div class="class-icon">
-              <i class="empty-square"></i>
-            </div>
-            <span>Clase 3</span>
-          </li>
-        </ul>
-      </nav>
-    </aside>
-
-    <form class="main-content" method="post" action="{{ url_for('ejercicios_bp.guardar_notas', id_aula=id_aula, id_ejercicio=id_ejercicio) }}">
-      <div class="exercise-header">
-        <i class="icon-circle-empty"></i>
-        <span class="ejercicio-titulo">Ejercicio 1</span>
-        <div class="title-buttons">
-          <a class="title-button-container" href="{{ url_for('ejercicios_bp.editar', id_aula=id_aula, id_ejercicio=id_ejercicio) }}">
-            <button class="card-button" id="boton-editar" type="button">
-              <i class="icon-pencil"></i>
-              Editar ejercicio
-            </button>
-          </a>
-          <a class="title-button-container">
-            <button type="submit" class="button" id="boton-guardar">
-              Guardar
-            </button>
-          </a>
-        </div>
-      </div>
-
-      <table class="exercise-table">
-        <thead>
-          <tr class="table-header">
-            <th>Nombre</th>
-            <th>Nota</th>
-            <th>Intentos</th>
-            <th>Resuelto</th>
-            <th>A tiempo</th>
-            <th>Código</th>
-          </tr>
-        </thead>
-        <tbody class="table-body">
-          {% for usuario in estadisticas %}
-          <tr class="table-row usuario">
-            <input type="hidden" name="id-usuario" value="{{ usuario.idUsuario }}-{{ usuario.idCodigo }}">
-            <td>
-              <i class="icon-circle icon-warning"></i>
-              {{ usuario.nombre1 }} {{ usuario.apellido1 }}
-            </td>
-            <td>
-              <input name="nota-{{ usuario.idUsuario }}" type="text" class="underline-input note-input"
-                value="{{ usuario.notaObtenida if usuario.notaObtenida is not none else '' }}">/100
-            </td>
-            <td>
-              <div class="attempts">{{ usuario.intentosRealizados if usuario.intentosRealizados is not none else 0 }}
-              </div>
-            </td>
-            <td>
-              <div class="checkmark">
-                {% if usuario.resuelto %}
-                <i class="icon-check"></i>
-                {% else %}
-                <i class="icon-cancel"></i>
-                {% endif %}
-              </div>
-            </td>
-            <td>
-              <div class="clock">
-                <i class="icon-ok"></i>
-              </div>
-            </td>
-            <td>
-              <a href="" class="button-link">
-                <button class="card-button"><i class="icon-code"></i> Ver código</button>
+  <div class="container-fluid m-0 p-0">
+    <div class="row m-0 p-0">
+      <aside class="col-2 sidebar p-0">
+        <nav class="side-nav h-100">
+          <ul class="list-unstyled">
+            <i class="divisor"></i>
+            <li class="nav-item home">
+              <a href="clases.html">
+                <i class="icon-home"></i>
+                <span>Inicio</span>
               </a>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </form>
+            </li>
+            <i class="divisor"></i>
+            <li class="nav-item class1">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <a href="lista-ejercicios-profesor.html">Clase 1</a>
+            </li>
+            <li class="nav-item class2">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <a href="lista-ejercicios.html">Clase 2</a>
+            </li>
+            <li class="nav-item class3">
+              <div class="class-icon">
+                <i class="empty-square"></i>
+              </div>
+              <span>Clase 3</span>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="col-10 m-0 p-0">
+        <form method="post" action="{{ url_for('ejercicios_bp.guardar_notas', id_aula=id_aula, id_ejercicio=id_ejercicio) }}">
+          <div class="exercise-header d-flex align-items-center gap-2 mb-4">
+            <i class="icon-circle-empty"></i>
+            <span class="ejercicio-titulo">Ejercicio 1</span>
+            <div class="title-buttons ms-auto d-flex gap-2">
+              <a class="title-button-container" style="min-width: 150px;" href="{{ url_for('ejercicios_bp.editar', id_aula=id_aula, id_ejercicio=id_ejercicio) }}">
+                <button class="card-button" id="boton-editar" type="button">
+                  <i class="icon-pencil"></i>
+                  Editar ejercicio
+                </button>
+              </a>
+              <button type="submit" class="button" style="min-width: 150px;" id="boton-guardar">
+                Guardar
+              </button>
+            </div>
+          </div>
+
+          <table class="exercise-table">
+            <thead>
+              <tr class="table-header">
+                <th>Nombre</th>
+                <th>Nota</th>
+                <th>Intentos</th>
+                <th>Resuelto</th>
+                <th>A tiempo</th>
+                <th>Código</th>
+              </tr>
+            </thead>
+            <tbody class="table-body">
+              {% for usuario in estadisticas %}
+              <tr class="table-row usuario">
+                <input type="hidden" name="id_usuario" value="{{ usuario.idUsuario }}">
+                <td>
+                  <i class="icon-circle icon-warning"></i>
+                  {{ usuario.nombre1 }} {{ usuario.apellido1 }}
+                </td>
+                <td>
+                  <input name="nota-{{ usuario.idUsuario }}" type="text" class="underline-input note-input"
+                    value="{{ usuario.notaObtenida if usuario.notaObtenida is not none else 0 }}">/100
+                </td>
+                <td>
+                  <div class="attempts">{{ usuario.intentosRealizados if usuario.intentosRealizados is not none else 0 }}
+                  </div>
+                </td>
+                <td>
+                  <div class="checkmark">
+                    {% if usuario.estado %}
+                    <i class="icon-check"></i>
+                    {% else %}
+                    <i class="icon-cancel"></i>
+                    {% endif %}
+                  </div>
+                </td>
+                <td>
+                  <div class="clock">
+                    <i class="icon-ok"></i>
+                  </div>
+                </td>
+                <td>
+                  <a href="" class="button-link">
+                    <button class="card-button"><i class="icon-code"></i> Ver código</button>
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </form>
+      </main>
+    </div>
   </div>
 </body>
 

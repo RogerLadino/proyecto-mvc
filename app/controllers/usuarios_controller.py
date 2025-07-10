@@ -74,7 +74,7 @@ def iniciar_sesion():
 
         if user_data and bcrypt.check_password_hash(user_data['contraseña'], password):
             session.clear()
-            session['user_id'] = user_data['idUsuario']
+            session['id_usuario'] = user_data['idUsuario']
             flash('Inicio de sesión exitoso.', 'success')
             return redirect(url_for('usuario_bp.dashboard'))
         else:
