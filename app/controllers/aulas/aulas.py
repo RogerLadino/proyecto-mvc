@@ -84,6 +84,7 @@ def redirigir_aulas():
 @aulas_bp.route('/inicio')
 def inicio_segun_rol():
     id_usuario = obtener_sesion_id_usuario()
+
     print(id_usuario)
     if es_profesor(id_usuario):
         return redirect(url_for('aulas_bp.aulas'))  # Vista para profesores

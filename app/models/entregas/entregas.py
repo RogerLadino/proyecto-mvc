@@ -29,6 +29,7 @@ def insertar_entrega(id_usuario, id_ejercicio, notaObtenida = 0):
 def darNota(idUsuario, idEjercicio, nota):
   connection = current_app.connection
     
+  print(idUsuario, idEjercicio, nota)
   with connection.cursor() as cursor:
     cursor.execute("""
       UPDATE entrega 

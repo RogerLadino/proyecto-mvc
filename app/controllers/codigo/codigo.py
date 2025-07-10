@@ -17,9 +17,12 @@ def codigo(id_aula, id_ejercicio, id_usuario):
     pruebas = consultar_pruebas(id_ejercicio)
     usuarios = consultar_usuarios_con_codigo(id_ejercicio)
     codigo = consultar_codigo(id_usuario, id_ejercicio)
+
     entrega = consultar_entrega(id_ejercicio, id_usuario)
+
     if entrega is None:
-        insertar_entrega(id_ejercicio, id_usuario)
+        insertar_entrega(id_usuario, id_ejercicio)
+
     codigoUsuario = consultar_codigo(id_usuario, id_ejercicio)
     if codigoUsuario is None:
         insertar_codigo(id_usuario, id_ejercicio)

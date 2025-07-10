@@ -34,7 +34,7 @@ def ejercicio(id_aula, id_ejercicio):
         return render_template('ejercicios/ejercicio-profesor.html', id_aula=id_aula, id_ejercicio=id_ejercicio, estadisticas=estadisticas, ejercicio=ejercicio, id_usuario=idUsuario, sidebar=aulas_sidebar)
 
     entrega = consultar_entrega(id_ejercicio, idUsuario)
-    return render_template('ejercicios/ejercicio.html', ejercicio=ejercicio, entrega=entrega, id_aula=id_aula, id_ejercicio=id_ejercicio, sidebar=aulas_sidebar)
+    return render_template('ejercicios/ejercicio.html', ejercicio=ejercicio, entrega=entrega, id_aula=id_aula, id_ejercicio=id_ejercicio, sidebar=aulas_sidebar, id_usuario=idUsuario)
 
 @ejercicios_bp.route('/aulas/<id_aula>/ejercicios/crear', methods=['GET', 'POST'])
 def crear(id_aula):
@@ -92,7 +92,7 @@ def guardar_notas(id_aula, id_ejercicio):
     usuarios = request.form.getlist('id_usuario')
     for idUsuario in usuarios:
         nota = request.form.get(f'nota-{idUsuario}', 0)
-        entrega = consultar_entrega(idUsuario, id_ejercicio)
+        entrega = consultar_entrega(id_ejercicio, idUsuario)
         if entrega is None:
             try:
                 insertar_entrega(idUsuario, id_ejercicio, nota)

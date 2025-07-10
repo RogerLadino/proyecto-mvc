@@ -63,7 +63,7 @@ def es_profesor(id_usuario):
     connection = current_app.connection
     with connection.cursor() as cursor:
         cursor.execute("""
-            SELECT * FROM usuario_aula
+            SELECT * FROM usuario 
             WHERE idUsuario = %s AND idRol = 1
         """, (id_usuario))
         return cursor.fetchone() is not None
