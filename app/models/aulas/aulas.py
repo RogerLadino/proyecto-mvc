@@ -3,7 +3,7 @@ from flask import current_app
 # Listar aulas creadas por un profesor
 def listar_aulas(id_usuario):
     connection = current_app.connection
-    with connection.cursor(dictionary=True) as cursor:
+    with connection.cursor() as cursor:
         cursor.execute("""
             SELECT a.*
             FROM aula a
@@ -34,17 +34,17 @@ def insertar_aula(nombre, codigo, id_usuario):
 # Consultar aula por ID
 def consultar_aula(id_aula):
     connection = current_app.connection
-    with connection.cursor(dictionary=True) as cursor:
+    with connection.cursor() as cursor:
         cursor.execute("SELECT * FROM aula WHERE idAula = %s", (id_aula,))
         return cursor.fetchone()
 
 # Modificar aula
-def modificar_aula(id_aula, nombre, codigo):
+def modificar_aula(id_aula, nombre):
     connection = current_app.connection
     with connection.cursor() as cursor:
         cursor.execute(
-            "UPDATE aula SET nombre = %s, codigo = %s WHERE idAula = %s",
-            (nombre, codigo, id_aula)
+            "UPDATE aula SET nombre = %s WHERE idAula = %s",
+            (nombre, id_aula)
         )
         connection.commit()
 
@@ -58,8 +58,18 @@ def eliminar_aula(id_aula):
         cursor.execute("DELETE FROM aula WHERE idAula = %s", (id_aula,))
         connection.commit()
 
+# Verificar si un usuario es profesor
+def es_profesor(id_usuario):
+    connection = current_app.connection
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT * FROM usuario_aula
+            WHERE idUsuario = %s AND idRol = 1
+        """, (id_usuario))
+        return cursor.fetchone() is not None
+
 # Verificar si un usuario es profesor de un aula
-def es_profesor(id_usuario, id_aula):
+def es_profesor_de_aula(id_usuario, id_aula):
     connection = current_app.connection
     with connection.cursor() as cursor:
         cursor.execute("""
@@ -70,7 +80,7 @@ def es_profesor(id_usuario, id_aula):
 
 def listar_aulas_por_profesor(id_usuario):
     connection = current_app.connection
-    with connection.cursor(dictionary=True) as cursor:
+    with connection.cursor() as cursor:
         cursor.execute("""
             SELECT a.*
             FROM aula a
@@ -83,7 +93,7 @@ def listar_aulas_por_profesor(id_usuario):
 # Listar aulas a las que un alumno está inscrito
 def listar_aulas_alumno(id_usuario):
     connection = current_app.connection
-    with connection.cursor(dictionary=True) as cursor:
+    with connection.cursor() as cursor:
         cursor.execute("""
             SELECT a.*
             FROM aula a

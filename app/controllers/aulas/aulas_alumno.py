@@ -1,7 +1,6 @@
-from flask import Blueprint, render_template, session, request, redirect, url_for, flash
+from flask import Blueprint, render_template, session, request, redirect, url_for, flash, current_app
 from app.services.usuario import obtener_sesion_id_usuario
 from app.models.aulas.aulas import listar_aulas_alumno
-from app import mysql
 
 aulas_alumno_bp = Blueprint('aulas_alumno_bp', __name__)
 
@@ -16,9 +15,9 @@ def unirse():
     codigo = request.form.get('codigo')
     id_usuario = obtener_sesion_id_usuario()
 
-    connection = mysql.connection
+    connection = current_app.connection
     try:
-        with connection.cursor(dictionary=True) as cursor:
+        with connection.cursor() as cursor:
             # Verificar si existe un aula con ese código
             cursor.execute("SELECT idAula FROM aula WHERE codigo = %s", (codigo,))
             aula = cursor.fetchone()

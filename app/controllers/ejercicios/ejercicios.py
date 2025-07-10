@@ -6,7 +6,8 @@ from app.models.ejercicios.ejercicios import (insertar_ejercicio, consultar_ejer
 from app.models.pruebas.pruebas import (insertar_prueba, consultar_pruebas, editar_prueba)
 from app.models.entregas.entregas import (consultar_entrega, insertar_entrega, darNota)
 from app.services.usuario import (obtener_sesion_id_usuario)
-from app.models.aulas.aulas import (es_profesor, consultar_aula, actualizar_codigo_aula)
+from app.models.aulas.aulas import (consultar_aula, actualizar_codigo_aula, es_profesor_de_aula)
+from app.models.codigo.codigo import (insertar_codigo)
 
 ejercicios_bp = Blueprint('ejercicios_bp', __name__)
 
@@ -18,7 +19,7 @@ def ejercicios(id_aula):
 
   aula = consultar_aula(id_aula)
   
-  if es_profesor(idUsuario, id_aula):
+  if es_profesor_de_aula(idUsuario, id_aula):
     return render_template('ejercicios/lista-ejercicios-profesor.html', id_aula=id_aula, ejercicios=ejercicios, aula=aula)
 
   return render_template('ejercicios/lista-ejercicios.html', id_aula=id_aula, ejercicios=ejercicios, aula=aula)
@@ -29,10 +30,10 @@ def ejercicio(id_aula, id_ejercicio):
 
   ejercicio = consultar_ejercicio(id_ejercicio)
 
-  if es_profesor(idUsuario, id_aula):
+  if es_profesor_de_aula(idUsuario, id_aula):
     estadisticas = consultar_estadisticas_ejercicio(id_ejercicio, id_aula) 
     
-    return render_template('ejercicios/ejercicio-profesor.html', id_aula=id_aula, id_ejercicio=id_ejercicio, estadisticas=estadisticas, ejercicio=ejercicio)
+    return render_template('ejercicios/ejercicio-profesor.html', id_aula=id_aula, id_ejercicio=id_ejercicio, estadisticas=estadisticas, ejercicio=ejercicio, id_usuario=idUsuario)
 
   entrega = consultar_entrega(id_ejercicio, idUsuario)
   
@@ -48,6 +49,10 @@ def crear(id_aula):
     try:
       idEjercicio = insertar_ejercicio(id_aula, nombre, descripcion)
     
+      id_usuario = obtener_sesion_id_usuario() 
+
+      insertar_entrega(id_usuario, idEjercicio) 
+      insertar_codigo(id_usuario, idEjercicio) 
       if pruebasJson is not None:
         pruebas = json.loads(pruebasJson)
         
@@ -82,7 +87,7 @@ def editar(id_aula, id_ejercicio):
     except Exception as e:
       print('An error has ocurried ', str(e))
 
-    return redirect(url_for('ejercicios_bp.ejercicio', id_aula=id_aula, id_ejercicio=id_ejercicio))
+    return redirect(url_for('ejercicios_bp.ejercicios', id_aula=id_aula))
   
   ejercicio = consultar_ejercicio(id_ejercicio)
 

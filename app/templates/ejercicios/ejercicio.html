@@ -124,8 +124,8 @@
                 </tr>
               </tbody>
             </table>
-            <a href="{{ url_for('ejercicios_bp.ejercicio', id_aula=id_aula, id_ejercicio=id_ejercicio) }}">
-              <button class="button w-100">Ver código</button>
+            <a href="{{ url_for('codigo_bp.codigo', id_aula=id_aula, id_ejercicio=id_ejercicio, id_usuario=entrega.idUsuario) }}">
+              <button type="button" class="button w-100">Ver código</button>
             </a>
           </div>
         </div>

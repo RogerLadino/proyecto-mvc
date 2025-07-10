@@ -76,17 +76,9 @@ def iniciar_sesion():
             session.clear()
             session['id_usuario'] = user_data['idUsuario']
             flash('Inicio de sesión exitoso.', 'success')
-            return redirect(url_for('usuario_bp.dashboard'))
+            return redirect(url_for('aulas_bp.inicio_segun_rol'))
         else:
             flash('Correo o contraseña incorrectos.', 'danger')
             return redirect(url_for('usuario_bp.iniciar_sesion'))
 
     return render_template('login.html')
-
-@usuario_bp.route('/dashboard')
-def dashboard():
-    if 'user_id' not in session:
-        flash('Debes iniciar sesión para ver esta página.', 'warning')
-        return redirect(url_for('usuario_bp.iniciar_sesion'))
-    
-    return f"<h1>Bienvenido al Dashboard! Tu ID de usuario en la sesión es: {session['user_id']}</h1>"

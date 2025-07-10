@@ -37,18 +37,17 @@ def create_app(config_class=Config):
     from app.controllers.ejercicios.ejercicios import ejercicios_bp
     from app.controllers.codigo.codigo import codigo_bp
     from app.controllers.reportes.reportes_controller import reportes_bp 
+    from app.controllers.aulas.aulas import aulas_bp
+    from app.controllers.aulas.aulas_alumno import aulas_alumno_bp
     
     app.register_blueprint(main_bp)
     app.register_blueprint(usuario_bp)
     app.register_blueprint(ejercicios_bp)
     app.register_blueprint(codigo_bp)
     app.register_blueprint(reportes_bp) 
+    app.register_blueprint(aulas_bp)
+    app.register_blueprint(aulas_alumno_bp)
     
     Bcrypt(app)
-
-    with app.app_context():
-        # Aquí registramos nuestro controlador
-        from .controllers.usuarios_controller import usuario_bp
-        app.register_blueprint(usuario_bp)
 
     return app

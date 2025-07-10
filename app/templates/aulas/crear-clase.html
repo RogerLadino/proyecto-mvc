@@ -8,30 +8,30 @@
 
     <!-- Bootstrap -->
     <link
-      href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}"
+      href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}"
       rel="stylesheet"
     />
 
     <!-- Tus estilos -->
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/general.css') }}"
+      href="{{ url_for('static', filename='style/general.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/icons.css') }}"
+      href="{{ url_for('static', filename='icons/icons.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/navigation.css') }}"
+      href="{{ url_for('static', filename='style/navigation.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/clases.css') }}"
+      href="{{ url_for('static', filename='style/clases.css') }}"
     />
   </head>
 
-  <body class="bg-dark text-light">
+  <body class="text-light">
     <!-- Navbar -->
     <nav
       class="navbar navbar-expand-lg"
@@ -111,21 +111,6 @@
                 required
               />
             </div>
-
-            <div class="mb-3">
-              <label class="form-label d-flex align-items-center gap-2">
-                <i class="icon-circle-empty"></i>
-                <span>Código de la clase</span>
-              </label>
-              <input
-                type="text"
-                name="codigo"
-                class="form-control"
-                placeholder="Ejemplo: ABC123"
-                required
-              />
-            </div>
-
             <div class="d-flex gap-3">
               <button
                 type="submit"
@@ -146,6 +131,6 @@
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
   </body>
 </html>

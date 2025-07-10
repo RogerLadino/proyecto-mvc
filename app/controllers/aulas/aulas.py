@@ -11,8 +11,9 @@ from app.models.aulas.aulas import es_profesor
 from app.services.usuario import obtener_sesion_id_usuario
 from app.models.aulas.aulas import (
     listar_aulas, insertar_aula, consultar_aula,
-    modificar_aula, eliminar_aula
+    modificar_aula, eliminar_aula, listar_aulas_por_profesor
 )
+from app.utils.generar_codigo import generar_codigo
 
 aulas_bp = Blueprint('aulas_bp', __name__)
 
@@ -20,7 +21,7 @@ aulas_bp = Blueprint('aulas_bp', __name__)
 def aulas():
     try:
         id_usuario = obtener_sesion_id_usuario()
-        aulas = listar_aulas(id_usuario)
+        aulas = listar_aulas_por_profesor(id_usuario)
         print("Aulas devueltas:", aulas)
 
         return render_template('aulas/clases.html', aulas=aulas)
@@ -32,7 +33,7 @@ def aulas():
 def crear():
     if request.method == 'POST':
         nombre = request.form.get('nombre')
-        codigo = request.form.get('codigo')
+        codigo = generar_codigo(6)
         id_usuario = obtener_sesion_id_usuario()
         try:
             insertar_aula(nombre, codigo, id_usuario)
@@ -40,18 +41,19 @@ def crear():
             return redirect(url_for('aulas_bp.aulas'))
         except Exception as e:
             flash(f"Error al crear aula: {str(e)}", "danger")
-        return render_template('aulas/crear-clase.html')
+    return render_template('aulas/crear-clase.html')
 
 @aulas_bp.route('/aulas/modificar/<int:id_aula>', methods=['GET', 'POST'])
 def modificar(id_aula):
     if request.method == 'POST':
         nombre = request.form.get('nombre')
-        codigo = request.form.get('codigo')
+
         try:
-            modificar_aula(id_aula, nombre, codigo)
+            modificar_aula(id_aula, nombre)
             flash("Aula modificada exitosamente", "success")
             return redirect(url_for('aulas_bp.aulas'))
         except Exception as e:
+            print('hi', str(e))
             flash(f"Error al modificar aula: {str(e)}", "danger")
     try:
         aula = consultar_aula(id_aula)
@@ -79,8 +81,9 @@ def redirigir_aulas():
         return redirect(url_for('aulas_alumno_bp.aulas_alumno'))
 
 @aulas_bp.route('/inicio')
-def inicio_según_rol():
+def inicio_segun_rol():
     id_usuario = obtener_sesion_id_usuario()
+    print(id_usuario)
     if es_profesor(id_usuario):
         return redirect(url_for('aulas_bp.aulas'))  # Vista para profesores
     else:

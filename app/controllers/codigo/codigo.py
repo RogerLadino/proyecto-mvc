@@ -5,7 +5,7 @@ from app.models.ejercicios.ejercicios import (consultar_ejercicio)
 from app.models.pruebas.pruebas import (consultar_pruebas)
 from app.models.codigo.codigo import (consultar_usuarios_con_codigo, consultar_codigo, insertar_codigo, consultar_usuario_con_codigo, consultar_codigo_por_id)
 from app.services.codigo import (ejecutar_codigo_usuario, ejecutar_pruebas)
-from app.models.aulas.aulas import (es_profesor, obtener_profesor)
+from app.models.aulas.aulas import (es_profesor_de_aula, obtener_profesor)
 from app.models.entregas.entregas import (consultar_entrega, insertar_entrega)
 from app.services.usuario import (obtener_sesion_id_usuario)
 
@@ -22,16 +22,16 @@ def codigo(id_aula, id_ejercicio, id_usuario):
   codigo = consultar_codigo(id_usuario, id_ejercicio)
 
   entrega = consultar_entrega(id_ejercicio, id_usuario)
-  if not entrega:
+  if entrega is None:
     insertar_entrega(id_ejercicio, id_usuario)
   
   codigoUsuario = consultar_codigo(id_usuario, id_ejercicio)
-  if not codigoUsuario:
+  if codigoUsuario is None:
     insertar_codigo(id_usuario, id_ejercicio)
   
   # Los usuarios que podrá ver el profesor son todos
   
-  if es_profesor(obtener_sesion_id_usuario(), id_aula):
+  if es_profesor_de_aula(obtener_sesion_id_usuario(), id_aula):
     print('hi')
     return render_template('codigo/codigo-profesor.html', ejercicio=ejercicio, pruebas=pruebas, usuarios=usuarios, codigo=codigo, id_aula=id_aula, id_usuario=id_usuario, id_ejercicio=id_ejercicio)
 

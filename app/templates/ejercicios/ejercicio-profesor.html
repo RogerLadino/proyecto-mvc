@@ -72,6 +72,12 @@
             <i class="icon-circle-empty"></i>
             <span class="ejercicio-titulo">Ejercicio 1</span>
             <div class="title-buttons ms-auto d-flex gap-2">
+              <a class="title-button-container" style="min-width: 150px;" href="{{ url_for('codigo_bp.codigo', id_aula=id_aula, id_ejercicio=id_ejercicio, id_usuario=id_usuario) }}">
+                <button class="card-button" id="boton-editar" type="button">
+                  <i class="icon-code"></i>
+                  Ver código
+                </button>
+              </a>
               <a class="title-button-container" style="min-width: 150px;" href="{{ url_for('ejercicios_bp.editar', id_aula=id_aula, id_ejercicio=id_ejercicio) }}">
                 <button class="card-button" id="boton-editar" type="button">
                   <i class="icon-pencil"></i>
@@ -126,8 +132,8 @@
                   </div>
                 </td>
                 <td>
-                  <a href="" class="button-link">
-                    <button class="card-button"><i class="icon-code"></i> Ver código</button>
+                  <a href="{{ url_for('codigo_bp.codigo', id_aula=id_aula, id_ejercicio=id_ejercicio, id_usuario=usuario.idUsuario) }}" class="button-link">
+                    <button type="button" class="card-button"><i class="icon-code"></i> Ver código</button>
                   </a>
                 </td>
               </tr>
