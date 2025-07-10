@@ -75,7 +75,7 @@
   align-items: center;
 }
 
-.valor-parametro{
+.valor-parametro {
   background-color: var(--card);
   border: none;
   padding: 10px;
@@ -195,7 +195,8 @@ input-label {
 }
 
 .test-header .dropdown-toggle.expanded {
-  transform: rotate(180deg); /* Rotar el ícono cuando está expandido */
+  transform: rotate(180deg);
+  /* Rotar el ícono cuando está expandido */
 }
 
 .test-main-content {

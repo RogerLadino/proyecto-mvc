@@ -46,7 +46,7 @@ export const mostrarResultadoConsola = (respuesta) => {
           <div class="test-title">
             <span>Consola global</span>
           </div>
-          <i class="icon-down-dir dropdown-toggle" onclick="toggleDropdown(event)"></i>
+          <i class="dropdown-toggle" onclick="toggleDropdown(event)"></i>
         </div>
         <div class="test-main-content">
           <div class="test-content">
@@ -89,7 +89,7 @@ export const mostrarResultadoConsola = (respuesta) => {
             <span class="test-status" style="margin-left:auto;${prueba.paso ? 'color:var(--success);' : 'color:var(--accent);'}">
               ${prueba.paso ? 'Pasada' : 'Fallida'}
             </span>
-            <i class="icon-down-dir dropdown-toggle" onclick="toggleDropdown(event)"></i>
+            <i class="dropdown-toggle" onclick="toggleDropdown(event)"></i>
           </div>
           <div class="test-main-content">
             ${prueba.consola ? `

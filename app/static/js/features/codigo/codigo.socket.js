@@ -1,10 +1,10 @@
 import { editor } from './codigo.editor.js';
 
-export const iniciarCodigoSocket = (idCodigo) => {
+export const iniciarCodigoSocket = (idUsuario, idEjercicio) => {
   const socket = io();
 
   // Unirse a la sala
-  socket.emit('join', { idCodigo: idCodigo });
+  socket.emit('join', { idUsuario, idEjercicio });
 
   let bloqueandoCambio = false;
   let temporizador = null;
@@ -18,7 +18,8 @@ export const iniciarCodigoSocket = (idCodigo) => {
 
     temporizador = setTimeout(() => {
       socket.emit('actualizar_codigo', {
-        idCodigo: idCodigo,
+        idUsuario: idUsuario,
+        idEjercicio: idEjercicio,
         codigo: editor.getValue()
       });
     }, 250);
