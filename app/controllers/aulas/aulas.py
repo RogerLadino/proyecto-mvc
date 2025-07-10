@@ -1,36 +1,35 @@
-
-# Este archivo debe contener las siguientes rutas:
-
-# GET /aulas -- Listar aulas
-# POST /aulas/crear -- Crear aulas
-# DELETE /aulas/eliminar/<id> -- Eliminar aula según id
-# PUT /aulas/modificar/<id>  -- Modificar aula según id
 from flask import Blueprint,render_template, request, redirect, url_for, session, flash
 from config import Config
 from app.models.aulas.aulas import es_profesor
 from app.services.usuario import obtener_sesion_id_usuario
 from app.models.aulas.aulas import (
     listar_aulas, insertar_aula, consultar_aula,
-    modificar_aula, eliminar_aula, listar_aulas_por_profesor
+    modificar_aula, eliminar_aula, listar_aulas_por_profesor,
+    obtener_aulas_sidebar
 )
 from app.utils.generar_codigo import generar_codigo
 
 aulas_bp = Blueprint('aulas_bp', __name__)
 
+
 @aulas_bp.route('/aulas')
 def aulas():
+    aulas_sidebar = obtener_aulas_sidebar(obtener_sesion_id_usuario())
+
     try:
         id_usuario = obtener_sesion_id_usuario()
         aulas = listar_aulas_por_profesor(id_usuario)
         print("Aulas devueltas:", aulas)
 
-        return render_template('aulas/clases.html', aulas=aulas)
+        return render_template('aulas/clases.html', aulas=aulas, sidebar=aulas_sidebar)
     except Exception as e:
         flash(f"Error al obtener aulas: {str(e)}", "danger")
-        return render_template('aulas/clases.html', aulas=[])
+        return render_template('aulas/clases.html', aulas=[], sidebar=aulas_sidebar)
 
 @aulas_bp.route('/aulas/crear', methods=['GET', 'POST'])
 def crear():
+    aulas_sidebar = obtener_aulas_sidebar(obtener_sesion_id_usuario())
+
     if request.method == 'POST':
         nombre = request.form.get('nombre')
         codigo = generar_codigo(6)
@@ -41,10 +40,12 @@ def crear():
             return redirect(url_for('aulas_bp.aulas'))
         except Exception as e:
             flash(f"Error al crear aula: {str(e)}", "danger")
-    return render_template('aulas/crear-clase.html')
+    return render_template('aulas/crear-clase.html', sidebar=aulas_sidebar)
 
 @aulas_bp.route('/aulas/modificar/<int:id_aula>', methods=['GET', 'POST'])
 def modificar(id_aula):
+    aulas_sidebar = obtener_aulas_sidebar(obtener_sesion_id_usuario())
+
     if request.method == 'POST':
         nombre = request.form.get('nombre')
 
@@ -57,7 +58,7 @@ def modificar(id_aula):
             flash(f"Error al modificar aula: {str(e)}", "danger")
     try:
         aula = consultar_aula(id_aula)
-        return render_template('aulas/editar-clase.html', aula=aula)
+        return render_template('aulas/editar-clase.html', aula=aula, sidebar=aulas_sidebar)
     except Exception as e:
         flash(f"Error al cargar aula: {str(e)}", "danger")
         return redirect(url_for('aulas_bp.aulas'))
@@ -88,7 +89,7 @@ def inicio_segun_rol():
         return redirect(url_for('aulas_bp.aulas'))  # Vista para profesores
     else:
         return redirect(url_for('aulas_alumno_bp.aulas_alumno'))  # Vista para alumnos
-   
+
 
 
 

@@ -2,6 +2,8 @@
 
 from flask import Blueprint, render_template, abort
 from app.models.reportes.reportes_model import obtener_datos_reporte
+from app.services.usuario import obtener_sesion_id_usuario
+from app.models.aulas.aulas import obtener_aulas_sidebar
 
 # Se crea el Blueprint con un prefijo de URL para todas las rutas de este archivo
 reportes_bp = Blueprint('reportes', __name__, url_prefix='/reportes')
@@ -55,12 +57,15 @@ def ver_reporte(id_aula):
     # Convierte el diccionario de estudiantes a una lista para el renderizado
     lista_estudiantes = list(estudiantes_dict.values())
 
-    
+    # Sidebar para navegación
+    id_usuario = obtener_sesion_id_usuario()
+    aulas_sidebar = obtener_aulas_sidebar(id_usuario)
 
     # 3. Pasa los datos procesados a la plantilla HTML
     return render_template(
         'reportes.html',
         aula=aula_info,
         ejercicios=ejercicios_header,
-        estudiantes=lista_estudiantes
+        estudiantes=lista_estudiantes,
+        sidebar=aulas_sidebar
     )

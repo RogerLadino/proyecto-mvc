@@ -113,16 +113,16 @@ def obtener_profesor(id_aula):
     return cursor.fetchone()
     
 
-def obtener_aulas_sidebar(id_usuario, id_rol):
+def obtener_aulas_sidebar(id_usuario):
   connection = current_app.connection
   
   with connection.cursor() as cursor:
     cursor.execute("""
       SELECT * 
       FROM usuario_aula ua 
-      JOIN aulas a ON a.idUsuario = ua.idUsuario
-      WHERE a.idUsuario = %s AND idRol = %s
-    """, (id_usuario, id_rol))
+      JOIN aula a ON a.idAula = ua.idAula
+      WHERE ua.idUsuario = %s
+    """, (id_usuario))
     
     return cursor.fetchall()
 

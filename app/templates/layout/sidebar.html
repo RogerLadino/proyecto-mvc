@@ -1,22 +1,27 @@
-<aside class="sidebar">
-  <nav class="side-nav">
-    <ul>
+<aside class="col-2 sidebar d-none d-md-flex">
+  <nav class="side-nav h-100">
+    <ul class="list-unstyled">
       <i class="divisor"></i>
       <li class="nav-item home">
-        <a href="clases.html">
+        <a href="{{ url_for('aulas_bp.inicio_segun_rol' )}}">
           <i class="icon-home"></i>
           <span>Inicio</span>
         </a>
       </li>
       <i class="divisor"></i>
-      {% for aula in aulas %}
-        <li class="nav-item">
+      {% for aula in sidebar %}
+        <li class="nav-item class1">
           <div class="class-icon">
             <i class="empty-square"></i>
           </div>
-          <a href="{{ url_for("aulas_bp.aulas", id_aula=aula.idAula)}}">{{ aula.nombre }}</a>
+          <a href="{{ url_for('ejercicios_bp.ejercicios', id_aula=aula.idAula) }}">
+            {{ aula.nombre[:9] + '...' if aula.nombre|length > 9 else aula.nombre }}
+          </a>
         </li>
       {% endfor %}
+        <li class="nav-item class1" style="margin-top: auto;">
+          <a href="{{ url_for('main_bp.index') }}">Cerrar sesión</a>
+        </li>
     </ul>
   </nav>
 </aside>

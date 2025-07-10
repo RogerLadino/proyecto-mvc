@@ -13,59 +13,13 @@
 </head>
 
 <body>
-  <nav class="top-navbar">
-    <div class="nav-left">
-      <a href="clases.html" class="logo-link">
-        <div class="app-logo"></div>
-        <h1 class="app-name">Nombre</h1>
-      </a>
-    </div>
-    <div class="nav-right">
-      <div class="user-circle">
-        <i class="icon-user"></i>
-        <div class="dropdown-menu">
-          <a href="index.html" class="dropdown-item">Cerrar sesión</a>
-        </div>
-      </div>
-    </div>
-  </nav>
+  {% include 'layout/navbar.html' %}
 
   <div class="container-fluid m-0 p-0">
     <div class="row m-0 p-0">
-      <aside class="col-2 sidebar p-0">
-        <nav class="side-nav h-100">
-          <ul class="list-unstyled">
-            <i class="divisor"></i>
-            <li class="nav-item home">
-              <a href="clases.html">
-                <i class="icon-home"></i>
-                <span>Inicio</span>
-              </a>
-            </li>
-            <i class="divisor"></i>
-            <li class="nav-item class1">
-              <div class="class-icon">
-                <i class="empty-square"></i>
-              </div>
-              <a href="lista-ejercicios-profesor.html">Clase 1</a>
-            </li>
-            <li class="nav-item class2">
-              <div class="class-icon">
-                <i class="empty-square"></i>
-              </div>
-              <a href="lista-ejercicios.html">Clase 2</a>
-            </li>
-            <li class="nav-item class3">
-              <div class="class-icon">
-                <i class="empty-square"></i>
-              </div>
-              <span>Clase 3</span>
-            </li>
-          </ul>
-        </nav>
-      </aside>
+      {% include 'layout/sidebar.html' %}
 
-      <main class="col-10">
+      <main class="col-12 col-md-10">
         <div class="exercise-header d-flex align-items-center gap-2 mb-4">
           <i class="icon-circle-empty"></i>
           <span class="ejercicio-titulo">{{ ejercicio.nombre }}</span>
@@ -132,6 +86,7 @@
       </main>
     </div>
   </div>
+  <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
 </body>
 
 </html>

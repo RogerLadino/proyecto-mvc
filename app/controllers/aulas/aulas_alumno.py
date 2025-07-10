@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session, request, redirect, url_for, flash, current_app
 from app.services.usuario import obtener_sesion_id_usuario
-from app.models.aulas.aulas import listar_aulas_alumno
+from app.models.aulas.aulas import listar_aulas_alumno, obtener_aulas_sidebar
 
 aulas_alumno_bp = Blueprint('aulas_alumno_bp', __name__)
 
@@ -8,7 +8,8 @@ aulas_alumno_bp = Blueprint('aulas_alumno_bp', __name__)
 def aulas_alumno():
     id_usuario = obtener_sesion_id_usuario()
     aulas = listar_aulas_alumno(id_usuario)
-    return render_template('aulas/aulas-alumno.html', aulas=aulas)
+    aulas_sidebar = obtener_aulas_sidebar(id_usuario)
+    return render_template('aulas/aulas-alumno.html', aulas=aulas, sidebar=aulas_sidebar)
 
 @aulas_alumno_bp.route('/aulas-alumno/unirse', methods=['POST'])
 def unirse():

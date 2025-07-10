@@ -156,6 +156,8 @@
 }
 
 .class1 .class-icon{
+    min-width: 22px;
+    min-height: 22px;
     background-color: var(--accent);
 }
 
