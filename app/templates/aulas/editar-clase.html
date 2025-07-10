@@ -1,0 +1,153 @@
+<!-- templates/modificar-clase.html -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar Clase</title>
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}"
+    />
+
+    <!-- Tus estilos -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/general.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/icons.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/navigation.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/clases.css') }}"
+    />
+  </head>
+
+  <body class="bg-dark text-light">
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg"
+      style="background-color: var(--primary)"
+    >
+      <div class="container-fluid">
+        <a
+          class="navbar-brand d-flex align-items-center gap-2"
+          href="{{ url_for('aulas_bp.aulas') }}"
+        >
+          <div class="app-logo"></div>
+          <span class="app-name">Nombre</span>
+        </a>
+        <div class="dropdown">
+          <button
+            class="btn btn-dark rounded-circle"
+            type="button"
+            data-bs-toggle="dropdown"
+          >
+            <i class="icon-user"></i>
+          </button>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            style="background-color: var(--card)"
+          >
+            <li>
+              <a class="dropdown-item text-light" href="#">Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="d-flex">
+      <!-- Sidebar -->
+      <aside
+        class="sidebar d-flex flex-column p-3"
+        style="height: 100vh; background-color: var(--primary); width: 220px"
+      >
+        <ul class="nav nav-pills flex-column mb-4">
+          <li class="nav-item">
+            <a
+              href="{{ url_for('aulas_bp.aulas') }}"
+              class="nav-link d-flex align-items-center gap-2 text-light"
+            >
+              <i class="icon-home"></i><span>Inicio</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Main -->
+      <main class="main-content p-4 w-100">
+        <!-- Título -->
+        <div class="titulo-clase mb-4">
+          <div class="titulo d-flex align-items-center gap-2">
+            <div class="cuadrado"></div>
+            <h1 class="mb-0">Editar Clase</h1>
+          </div>
+        </div>
+
+        <!-- Formulario -->
+        <div
+          class="card p-4 rounded"
+          style="background-color: var(--card); max-width: 500px"
+        >
+          <form
+            method="POST"
+            action="{{ url_for('aulas_bp.modificar', id_aula=aula.idAula) }}"
+          >
+            <div class="mb-3">
+              <label class="form-label d-flex align-items-center gap-2">
+                <i class="icon-circle-empty"></i> Nombre de la clase
+              </label>
+              <input
+                type="text"
+                name="nombre"
+                class="form-control"
+                value="{{ aula.nombre }}"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label d-flex align-items-center gap-2">
+                <i class="icon-circle-empty"></i> Código
+              </label>
+              <input
+                type="text"
+                name="codigo"
+                class="form-control"
+                value="{{ aula.codigo }}"
+                required
+              />
+            </div>
+
+            <div class="d-flex gap-3">
+              <a
+                href="{{ url_for('aulas_bp.aulas') }}"
+                class="btn btn-secondary"
+                >Cancelar</a
+              >
+              <button
+                type="submit"
+                class="btn text-light"
+                style="background-color: var(--accent)"
+              >
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
+  </body>
+</html>
