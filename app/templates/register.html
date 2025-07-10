@@ -26,6 +26,18 @@
     {% endwith %}
 
     <form class="form" action="{{ url_for('usuario_bp.registrar') }}" method="POST">
+      
+      <!-- ===== NUEVO CAMPO DE SELECCIÓN DE ROL ===== -->
+      <div class="mb-2">
+        <label for="rol" class="form-label"><span class="dot"></span> Rol</label>
+        <select id="rol" name="rol" class="form-control" required>
+            <option value="" disabled selected>Selecciona tu rol...</option>
+            <option value="1">Profesor</option>
+            <option value="2">Alumno</option>
+        </select>
+      </div>
+      <!-- ============================================ -->
+
       <div class="row g-3 mb-2">
         <div class="col-6">
           <label for="nombre1" class="form-label"><span class="dot"></span> Primer nombre</label>
